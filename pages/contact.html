@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos - Gym Wear Store</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+</head>
+<body class="contact-body" >
+    <header class="contact-header">
+        <h1>Contáctanos</h1>
+        <p>Nos encantaría escuchar de ti</p>
+    </header>
+    
+    <nav>
+        <button class="hamburger-menu" onclick="toggleMenu()">
+            <i class="fa fa-bars"></i>
+        </button>
+        <img src="../Images/logo1.png" alt="logo" class="nav-logo">
+        <div class="off-canvas-menu" id="menu">
+            <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
+            <a href="../index.html">Inicio</a>
+            <a href="../pages/catalogo/catalogo.html">Catálogo</a>
+            <a href="../pages/contact.html">Contactanos</a>
+            <a href="#">Iniciar sesion</a>
+        </div>
+        <div class="nav-links" id="menu">
+            <a href="../index.html">Inicio</a>
+            <a href="../pages/catalogo/catalogo.html">Catálogo</a>
+            <a href="../pages/contact.html">Contactanos</a>
+            <a href="signIn.html">
+                <button class="boton-iniciar">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+            </a>
+        </div>
+        <button class="cart-icon" onclick="toggleCart()">
+            <i class="fa fa-shopping-cart"></i>
+        </button>
+    </nav>
+    <script>
+        function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("show");
+        }       
+    </script>
+    <!-- Carrito Off-Canvas -->
+    <div id="cart-off-canvas" class="cart-off-canvas">
+        <div class="off-canvas-header">
+            <h2>Carrito</h2>
+            <button class="close-button" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="off-canvas-content">
+            <div class="empty-cart">
+                <img src="../Images/empty bag.png" alt="Carrito Vacío">
+                <h3>Tu carrito está vacío</h3>
+                <p>No has añadido ningún producto.</p>
+                <a href="pages/catalogo/catalogo.html">
+                    <button class="shop-button">Catalogo</button>
+                </a>    
+            </div>
+        </div>
+        <div class="cart-summary">
+            <p>Subtotal: <span id="subtotal">$0.00</span></p>
+            <p>IVA (15%): <span id="iva">$0.00</span></p>
+            <p>Envío: <span id="envio">$0.00</span></p>
+            <p><strong>Total: <span id="total">$0.00</span></strong></p>
+            <button class="checkout-btn">Checkout</button>
+            <p class="note">Envío gratuito en compras mayores a $100.</p>
+        </div>
+    </div>        
+    <section class="contact-form">
+        <h2>Ponte en contacto</h2>
+        <form action="/send-message" method="POST">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Enviar mensaje</button>
+        </form>
+    </section>
+
+    <section class="physical-store">
+        <h2>Visítanos en nuestra tienda física</h2>
+        <p>Dirección: Calle Fitness, 123, Ciudad Deportiva</p>
+        <p>Horario: Lunes a Viernes, 9:00 AM - 8:00 PM</p>
+        <img class="contact-scalable" src="../Images/Athlex Store.jpg" alt="Store">
+    </section>
+
+    <footer class="contact-footer">
+        
+        <p style="color: aliceblue;">&copy; 2024 SportShop. Todos los derechos reservados.</p>
+    </footer>
+
+
+
+    <script>
+        let productoActual = '';
+        let descripcionActual = '';
+        let imagenesActuales = [];
+        let imagenPrincipal = '';
+        
+
+        function abrirModal(nombreProducto, descripcion, imagenes) {
+            productoActual = nombreProducto;
+            descripcionActual = descripcion;
+            imagenesActuales = imagenes;
+
+            // Obtener el precio del producto desde el HTML de la tarjeta
+            const productoCard = Array.from(document.querySelectorAll(".cat-product-card"))
+                .find(card => card.querySelector("h2").textContent === nombreProducto);
+
+            if (productoCard) {
+                const precioTexto = productoCard.querySelector("p").textContent; // Buscar el texto del precio
+                precioActual = parseFloat(precioTexto.replace('$', '')); // Convertir el precio a número
+            } else {
+                console.error("No se encontró el producto en el listado.");
+                return;
+            }
+
+            // Mostrar el modal
+            document.getElementById("modal").style.display = "flex";
+
+            // Establecer la primera imagen como principal
+            imagenPrincipal = imagenes[0];
+            document.getElementById("main-img").src = imagenPrincipal;
+
+            // Mostrar la descripción
+            document.getElementById("modal-desc").textContent = descripcion;
+
+            // Mostrar el precio en el modal (si es necesario añadirlo visualmente)
+            const modalOptions = document.getElementById("modal-options");
+            let modalPrice = document.getElementById("modal-price");
+            if (!modalPrice) {
+                modalPrice = document.createElement("p");
+                modalPrice.id = "modal-price";
+                modalPrice.style.fontWeight = "bold";
+                modalPrice.style.marginBottom = "10px";
+                modalOptions.insertBefore(modalPrice, modalOptions.firstChild);
+            }
+            modalPrice.textContent = `Precio: $${precioActual.toFixed(2)}`;
+
+            // Generar las imágenes en miniatura
+            const contenedorMiniaturas = document.getElementById("modal-img-container");
+            contenedorMiniaturas.innerHTML = '';
+            imagenes.forEach((imgSrc, index) => {
+                const img = document.createElement("img");
+                img.src = imgSrc;
+                img.className = "modal-img" + (index === 0 ? " active" : "");
+                img.onclick = function() {
+                    seleccionarImagenPrincipal(imgSrc);
+                };
+                contenedorMiniaturas.appendChild(img);
+            });
+        }
+
+        function seleccionarImagenPrincipal(src) {
+            imagenPrincipal = src;
+            document.getElementById("main-img").src = src;
+
+            // Actualizar la clase activa en las miniaturas
+            const miniaturas = document.querySelectorAll(".modal-img");
+            miniaturas.forEach(img => img.classList.remove("active"));
+            document.querySelector(`.modal-img[src="${src}"]`).classList.add("active");
+        }
+
+        function seleccionarTalla(elemento) {
+        const tallas = document.querySelectorAll('.talla-option');
+        tallas.forEach(talla => talla.classList.remove('active'));
+        elemento.classList.add('active');
+        // Puedes usar el atributo data-talla para obtener el valor seleccionado
+        const tallaSeleccionada = elemento.getAttribute('data-talla');
+        console.log('Talla seleccionada:', tallaSeleccionada);
+        }
+
+        function cerrarModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+
+        let carrito = [];
+
+        document.addEventListener("DOMContentLoaded", cargarCarrito);
+
+        function cargarCarrito() {
+            const carritoGuardado = localStorage.getItem("carrito");
+            if (carritoGuardado) {
+                carrito = JSON.parse(carritoGuardado); // Convertir el JSON en un array
+            } else {
+                carrito = []; // Inicializar como vacío si no existe
+            }
+            actualizarCarrito(); // Actualiza la visualización del carrito
+        }
+
+        // Función para agregar productos al carrito
+        function comprarProducto() {
+            const cantidad = parseInt(document.getElementById("cantidad").value);
+            const tallaBotonSeleccionado = document.querySelector(".talla-option.active");
+            if (!tallaBotonSeleccionado) {
+                alert("Por favor, selecciona una talla.");
+                return;
+            }
+
+            const talla = tallaBotonSeleccionado.getAttribute("data-talla");
+            alert(`Has comprado ${cantidad} unidad(es) de ${productoActual} en talla ${talla} :)`);
+            
+            // Datos del producto
+            const producto = {
+                nombre: productoActual,
+                descripcion: descripcionActual,
+                imagen: imagenPrincipal,
+                cantidad: cantidad,
+                talla: talla,
+                precio: precioActual, // Ajusta el precio según el producto
+            };
+
+            carrito.push(producto); // Agregar producto al carrito
+            cerrarModal(); // Cierra el modal
+            actualizarCarrito(); // Actualiza el carrito visualmente
+            guardarCarrito(); // Guarda el carrito en localStorage
+        }
+
+        const envioFijo = 5;
+        const envioGratisLimite = 100;
+        const ivaPorcentaje = 0.15;
+
+        function toggleCart() {
+            const cart = document.getElementById("cart-off-canvas");
+            cart.classList.toggle("open");
+            actualizarCarrito();
+        }
+
+        function agregarProducto(nombre, precio, imagen) {
+            const productoExistente = carrito.find(p => p.nombre === nombre);
+            if (productoExistente) {
+                productoExistente.cantidad++;
+            } else {
+                carrito.push({ nombre, precio, imagen, cantidad: 1 });
+            }
+            actualizarCarrito();
+        }
+
+        function eliminarProducto(nombre) {
+            carrito = carrito.filter(p => p.nombre !== nombre);
+            actualizarCarrito();
+            guardarCarrito(); // Guarda los cambios en localStorage
+        }
+        function guardarCarrito() {
+            console.log("Guardando carrito en localStorage:", carrito);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+
+        function actualizarCarrito() {
+            const contenido = document.querySelector(".off-canvas-content");
+            const resumen = document.querySelector(".cart-summary");
+
+            // Vaciar el contenido del carrito
+            contenido.innerHTML = "";
+
+            if (carrito.length === 0) {
+                // Mostrar mensaje de carrito vacío
+                contenido.innerHTML = `
+                    <div class="empty-cart">
+                        <img src="../Images/empty bag.png" alt="Carrito Vacío">
+                        <h3>Tu carrito está vacío</h3>
+                        <p>No has añadido ningún producto.</p>
+                        <a href="pages/catalogo/catalogo.html">
+                            <button class="shop-button">Catálogo</button>
+                        </a>
+                    </div>`;
+                resumen.style.display = "none";
+                return;
+            }
+
+            // Mostrar productos en el carrito
+            let subtotal = 0;
+            carrito.forEach(producto => {
+                subtotal += producto.precio * producto.cantidad;
+
+                const item = document.createElement("div");
+                item.className = "cart-item";
+                item.innerHTML = `
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                    <div class="cart-item-details">
+                        <h4>${producto.nombre}</h4>
+                        <p>Cantidad: X${producto.cantidad}</p>
+                        <p>Precio: $${(producto.precio * producto.cantidad).toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button onclick="eliminarProducto('${producto.nombre}')">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>`;
+                contenido.appendChild(item);
+            });
+
+            // Calcular totales
+            const iva = subtotal * ivaPorcentaje; // IVA es 15% (variable global)
+            const envio = subtotal >= envioGratisLimite ? 0 : envioFijo; // Envío gratis si supera el límite
+            const total = subtotal + iva + envio;
+
+            // Actualizar los totales en el resumen
+            document.getElementById("subtotal").textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById("iva").textContent = `$${iva.toFixed(2)}`;
+            document.getElementById("envio").textContent = `$${envio.toFixed(2)}`;
+            document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+
+            resumen.style.display = "block"; // Mostrar el resumen si hay productos
+        }
+
+        window.addEventListener("storage", function(event) {
+            if (event.key === "carrito") {
+                console.log("Evento storage detectado:", event.newValue);
+                carrito = JSON.parse(event.newValue || "[]");
+                actualizarCarrito();
+            }
+        });
+
+    </script>
+</body>
+</html>
