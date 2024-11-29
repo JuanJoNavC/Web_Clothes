@@ -476,10 +476,10 @@ img.scalable {
 
  /*Product*/
 section {                
-    margin-bottom: 1em;
-    padding: 2em;
+    margin-bottom: 15px;
+    padding: 10px;
     /*border: 1px solid #ccc;*/
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 /*Product grid*/
@@ -1439,7 +1439,8 @@ p {
     width: 100%;
     background: linear-gradient(135deg, #ececec, #ffffff);
     font-family: 'Arial', sans-serif;
-    padding-top: 50px; /* Margen superior */
+    padding-top: 20px; /* Margen superior */
+    padding-bottom: 20px;
     box-sizing: border-box; /* Incluye el padding en el tamaño total */
 }
 

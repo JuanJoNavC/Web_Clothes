@@ -1,21 +1,26 @@
-const form = document.getElementById('myForm');
+document.getElementById('myForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar el comportamiento predeterminado de enviar el formulario
+    // Capturar los valores del formulario
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const dob = document.getElementById('dob').value;
+    const gender = document.getElementById('gender').value;
+    const size = document.getElementById('size').value;
+    const cedula = document.getElementById('cedula').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const phone = document.getElementById('phone').value.trim();
 
-    // Acceder a los valores de los elementos del formulario
-    const name = domcument.getElementById('name').value.trim();
-    const email = domcument.getElementById('email').value.trim();
-
-    // Enviar datos a través de la API Fetch
+    // Enviar los datos al servidor
     fetch('/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email }) // Convertir los datos a formato JSON
+        body: JSON.stringify({ name, email, password, dob, gender, size, cedula, address, phone })
     })
-    .then(response => response.json())
-    .then(data => alert(data.message))
-    .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error: ', error));
 });
