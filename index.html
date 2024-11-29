@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportShop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'">
+    
+</head>
+<body>
+    <div> <!-- Header -->
+        <div class="hed" style="font-family: 'Lato', sans-serif"> <!-- Header 1 -->
+            <p style="color: aliceblue;">Lo que necesitas para vestir en el gimnasio</p>
+        </div>
+    </div>
+    
+    <div>   <!-- Header 2 -->   
+        <div> <!-- Titulo pag -->
+            <header>
+                <h1>ATHELX</h1>
+            </header>
+        </div>
+        <div>   <!-- Navegacion -->
+            <nav>
+                <button class="hamburger-menu" onclick="toggleMenu()">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <img src="Images/logo1-nb.png" alt="logo" class="nav-logo">
+                <div class="off-canvas-menu" id="menu">
+                    <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
+                    <a href="index.html">Inicio</a>
+                    <a href="pages/catalogo/catalogo.html">Catálogo</a>
+                    <a href="pages/contact.html">Contactanos</a>
+                    <a href="pages/signIn.html">Iniciar sesion</a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.htm">Inicio</a>
+                    <a href="pages/catalogo/catalogo.html">Catalogo</a>
+                    <a href="pages/contact.html">Contactanos</a>
+                    <a href="pages/signIn.html">
+                        <button class="boton-iniciar">
+                            <i class="fa-solid fa-user"></i>
+                        </button>
+                    </a>
+                </div>
+                <button class="cart-icon" onclick="toggleCart()">
+                    <i class="fa fa-shopping-cart"></i>
+                </button>
+            </nav>
+            <script>
+                function toggleMenu() {
+                const menu = document.getElementById("menu");
+                menu.classList.toggle("show");
+                }          
+            </script>
+            <!-- Carrito Off-Canvas -->
+            <div id="cart-off-canvas" class="cart-off-canvas">
+                <div class="off-canvas-header">
+                    <h2>Carrito</h2>
+                    <button class="close-button" onclick="toggleCart()">&times;</button>
+                </div>
+                <div class="off-canvas-content">
+                    <div class="empty-cart">
+                        <img src="Images/empty bag.png" alt="Carrito Vacío">
+                        <h3>Tu carrito está vacío</h3>
+                        <p>No has añadido ningún producto.</p>
+                        <a href="pages/catalogo/catalogo.html">
+                            <button class="shop-button">Catalogo</button>
+                        </a>    
+                    </div>
+                </div>
+                <div class="cart-summary">
+                    <p>Subtotal: <span id="subtotal">$0.00</span></p>
+                    <p>IVA (15%): <span id="iva">$0.00</span></p>
+                    <p>Envío: <span id="envio">$0.00</span></p>
+                    <p><strong>Total: <span id="total">$0.00</span></strong></p>
+                    <button class="checkout-btn">Checkout</button>
+                    <p class="note">Envío gratuito en compras mayores a $100.</p>
+                </div>
+            </div>
+           
+            <div style="font-family: 'Oswald', sans-serif">   <!-- Main Page -->
+                <div class="container" class="hero-section">
+                    <div class="left" id="inicio" > <!--Left grid-->
+                        <h1>Nuevas<br>Colecciones</br></h1>
+                        <p style="color: white;">La mejor ropa de gimnasio</p>
+                    </div>
+                    <div class="right" class="right-img"> <!-- right grid (img)-->
+                        <img src="" class="scalable" >
+                    </div>
+                </div>
+                
+                <!-- Contenido de productos -->
+                <main class="mainpadding" style="font-family: 'Lato', sans-serif">          
+                    <h2>Productos Destacados</h2>
+                    <section id="catalogo">
+                        <div class="product-grid">
+                            <div class="product-card">
+                                <div class="carousel">
+                                    <div class="carousel-images">
+                                        <img src="Images/gymsharkimg/image1.webp" alt="Producto 1 Imagen 1" class="product-image">
+                                        <img src="Images/gymsharkimg/image2.webp" alt="Producto 1 Imagen 2" class="product-image">
+                                        <img src="Images/gymsharkimg/image3.webp" alt="Producto 1 Imagen 3" class="product-image">
+                                    </div>
+                                </div>
+                                <h3>Power T-Shirt (Special Edition)</h3>
+                                <p>Oversized Fit<br>Black</p>
+                                <p class="price">US$50.00</p>
+                            </div>
+                    
+                            <div class="product-card">
+                                <div class="carousel">
+                                    <div class="carousel-images">
+                                        <img src="Images/younglaimg/image2.webp" alt="Producto 2 Imagen 1" class="product-image">
+                                        <img src="Images/younglaimg/image1.webp" alt="Producto 2 Imagen 2" class="product-image">
+                                        <img src="Images/younglaimg/image3.webp" alt="Producto 2 Imagen 3" class="product-image">
+                                    </div>
+                                </div>
+                                <h3>4464 Skyline Super Sized Tees</h3>
+                                <p>Super Oversized Fit<br>Diferentes Colores</p>
+                                <p class="price">US$35.00</p>
+                            </div>
+                    
+                            <div class="product-card">
+                                <div class="carousel">
+                                    <div class="carousel-images">
+                                        <img src="Images/controlled/image1.webp" alt="Producto 3 Imagen 1" class="product-image">
+                                        <img src="Images/controlled/image2.webp" alt="Producto 3 Imagen 2" class="product-image">
+                                        <img src="Images/controlled/image3.webp" alt="Producto 3 Imagen 3" class="product-image">
+                                    </div>
+                                </div>
+                                <h3>Retro - Crewnecks</h3>
+                                <p>Oversized Fit<br>Colores diferentes</p>
+                                <p class="price">US$70.00</p>
+                            </div>
+                    
+                            <div class="product-card">
+                                <div class="carousel">
+                                    <div class="carousel-images">
+                                        <img src="Images/gymsharkimg/image1.1.webp" alt="Producto 4 Imagen 1" class="product-image">
+                                        <img src="Images/gymsharkimg/image1.2.webp" alt="Producto 4 Imagen 2" class="product-image">
+                                        <img src="Images/gymsharkimg/image1.3.webp" alt="Producto 4 Imagen 3" class="product-image">
+                                    </div>
+                                </div>
+                                <h3>Mesh Tank</h3>
+                                <p>regular fit<br>White</p>
+                                <p class="price">US$36.00</p>
+                            </div>
+                        </div>
+                        <a href="pages/catalogo/catalogo.html">
+                            <button class="add-to-cart-btn">Ver mas..</button>
+                        </a>
+                        
+                    </section>
+                </main>  
+            </div>
+        </div>
+        <div class="video-fullscreen">
+            <video autoplay muted loop playsinline>
+                <source src="Videos/Video-2.mp4" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+            </video>
+            <div class="overlay-text">
+                Mejora tu estilo con <span>ATHLEX</span>
+            </div>
+        </div>
+    </div>
+    
+
+    <!--Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Sección de Ayuda -->
+            <div class="footer-column">
+                <h3>HELP</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Delivery Information</a></li>
+                    <li><a href="#">Returns Policy</a></li>
+                    <li><a href="#">Make A Return</a></li>
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Submit a Fake</a></li>
+                </ul>
+            </div>
+    
+            <!-- Sección Mi Cuenta -->
+            <div class="footer-column">
+                <h3>MI CUENTA</h3>
+                <ul>
+                    <li><a href="pages/signIn.html">Login</a></li>
+                    <li><a href="pages/signUp.html">Register</a></li>
+                </ul>
+            </div>
+    
+            <!-- Sección Páginas -->
+            <div class="footer-column">
+                <h3>PAGINAS</h3>
+                <ul>
+                    <li><a href="pages/catalogo/catalogo.html">Athelx Catalogo</a></li>
+                    <li><a href="pages/contact.html">Contactanos</a></li>
+                    <li><a href="https://www.gymshark.com/">Inspiracion</a></li>
+                </ul>
+            </div>
+    
+            <!-- Sección Más información -->
+            <div class="footer-column">
+                <h3>MAS SOBRE ATHELX</h3>
+                <div class="footer-images">
+                    <a href="pages/catalogo/gymshark.html"><img src="Images/gymsharkimg/gymshark logo.webp" alt="Gymshark"></a>
+                    <a href="pages/catalogo/youngla.html"><img src="Images/younglaimg/youngla logo.webp" alt="Youngla"></a>
+                    <a href="pages/catalogo/controlled.html"><img src="Images/controlled/controlled insanity.webp" alt="Controlled"></a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Métodos de Pago -->
+        <div class="payment-methods">
+            <img src="Images/Payment metods/visa-card.svg" alt="Visa">
+            <img src="Images/Payment metods/mastercard-card.svg" alt="MasterCard">
+            <img src="Images/Payment metods/amex-card.svg" alt="American Express">
+            <img src="Images/Payment metods/paypal-card.svg" alt="PayPal">
+            <img src="Images/Payment metods/applepay-card.svg" alt="Apple Pay">
+        </div>
+    
+        <!-- Términos -->
+        <div class="footer-bottom">
+            <p>© 2024 | ATHLEX Limited | All Rights Reserved. | We Do Gym.</p>
+            <ul>
+                <li><a href="#">Terms and Conditions</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Privacy Notice</a></li>
+                <li><a href="#">Cookie Policy</a></li>  
+            </ul>
+        </div>
+    
+        <!-- Redes Sociales -->
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </footer>
+    
+
+
+    <script>
+        let productoActual = '';
+        let descripcionActual = '';
+        let imagenesActuales = [];
+        let imagenPrincipal = '';
+        
+
+        function abrirModal(nombreProducto, descripcion, imagenes) {
+            productoActual = nombreProducto;
+            descripcionActual = descripcion;
+            imagenesActuales = imagenes;
+
+            // Obtener el precio del producto desde el HTML de la tarjeta
+            const productoCard = Array.from(document.querySelectorAll(".cat-product-card"))
+                .find(card => card.querySelector("h2").textContent === nombreProducto);
+
+            if (productoCard) {
+                const precioTexto = productoCard.querySelector("p").textContent; // Buscar el texto del precio
+                precioActual = parseFloat(precioTexto.replace('$', '')); // Convertir el precio a número
+            } else {
+                console.error("No se encontró el producto en el listado.");
+                return;
+            }
+
+            // Mostrar el modal
+            document.getElementById("modal").style.display = "flex";
+
+            // Establecer la primera imagen como principal
+            imagenPrincipal = imagenes[0];
+            document.getElementById("main-img").src = imagenPrincipal;
+
+            // Mostrar la descripción
+            document.getElementById("modal-desc").textContent = descripcion;
+
+            // Mostrar el precio en el modal (si es necesario añadirlo visualmente)
+            const modalOptions = document.getElementById("modal-options");
+            let modalPrice = document.getElementById("modal-price");
+            if (!modalPrice) {
+                modalPrice = document.createElement("p");
+                modalPrice.id = "modal-price";
+                modalPrice.style.fontWeight = "bold";
+                modalPrice.style.marginBottom = "10px";
+                modalOptions.insertBefore(modalPrice, modalOptions.firstChild);
+            }
+            modalPrice.textContent = `Precio: $${precioActual.toFixed(2)}`;
+
+            // Generar las imágenes en miniatura
+            const contenedorMiniaturas = document.getElementById("modal-img-container");
+            contenedorMiniaturas.innerHTML = '';
+            imagenes.forEach((imgSrc, index) => {
+                const img = document.createElement("img");
+                img.src = imgSrc;
+                img.className = "modal-img" + (index === 0 ? " active" : "");
+                img.onclick = function() {
+                    seleccionarImagenPrincipal(imgSrc);
+                };
+                contenedorMiniaturas.appendChild(img);
+            });
+        }
+
+        function seleccionarImagenPrincipal(src) {
+            imagenPrincipal = src;
+            document.getElementById("main-img").src = src;
+
+            // Actualizar la clase activa en las miniaturas
+            const miniaturas = document.querySelectorAll(".modal-img");
+            miniaturas.forEach(img => img.classList.remove("active"));
+            document.querySelector(`.modal-img[src="${src}"]`).classList.add("active");
+        }
+
+        function seleccionarTalla(elemento) {
+        const tallas = document.querySelectorAll('.talla-option');
+        tallas.forEach(talla => talla.classList.remove('active'));
+        elemento.classList.add('active');
+        // Puedes usar el atributo data-talla para obtener el valor seleccionado
+        const tallaSeleccionada = elemento.getAttribute('data-talla');
+        console.log('Talla seleccionada:', tallaSeleccionada);
+        }
+
+        function cerrarModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+
+        let carrito = [];
+
+        document.addEventListener("DOMContentLoaded", cargarCarrito);
+
+        function cargarCarrito() {
+            const carritoGuardado = localStorage.getItem("carrito");
+            if (carritoGuardado) {
+                carrito = JSON.parse(carritoGuardado); // Convertir el JSON en un array
+            } else {
+                carrito = []; // Inicializar como vacío si no existe
+            }
+            actualizarCarrito(); // Actualiza la visualización del carrito
+        }
+
+        // Función para agregar productos al carrito
+        function comprarProducto() {
+            const cantidad = parseInt(document.getElementById("cantidad").value);
+            const tallaBotonSeleccionado = document.querySelector(".talla-option.active");
+            if (!tallaBotonSeleccionado) {
+                alert("Por favor, selecciona una talla.");
+                return;
+            }
+
+            const talla = tallaBotonSeleccionado.getAttribute("data-talla");
+            alert(`Has comprado ${cantidad} unidad(es) de ${productoActual} en talla ${talla} :)`);
+            
+            // Datos del producto
+            const producto = {
+                nombre: productoActual,
+                descripcion: descripcionActual,
+                imagen: imagenPrincipal,
+                cantidad: cantidad,
+                talla: talla,
+                precio: precioActual, // Ajusta el precio según el producto
+            };
+
+            carrito.push(producto); // Agregar producto al carrito
+            cerrarModal(); // Cierra el modal
+            actualizarCarrito(); // Actualiza el carrito visualmente
+            guardarCarrito(); // Guarda el carrito en localStorage
+        }
+
+        const envioFijo = 5;
+        const envioGratisLimite = 100;
+        const ivaPorcentaje = 0.15;
+
+        function toggleCart() {
+            const cart = document.getElementById("cart-off-canvas");
+            cart.classList.toggle("open");
+            actualizarCarrito();
+        }
+
+        function agregarProducto(nombre, precio, imagen) {
+            const productoExistente = carrito.find(p => p.nombre === nombre);
+            if (productoExistente) {
+                productoExistente.cantidad++;
+            } else {
+                carrito.push({ nombre, precio, imagen, cantidad: 1 });
+            }
+            actualizarCarrito();
+        }
+
+        function eliminarProducto(nombre) {
+            carrito = carrito.filter(p => p.nombre !== nombre);
+            actualizarCarrito();
+            guardarCarrito(); // Guarda los cambios en localStorage
+        }
+        function guardarCarrito() {
+            console.log("Guardando carrito en localStorage:", carrito);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+
+        function actualizarCarrito() {
+            const contenido = document.querySelector(".off-canvas-content");
+            const resumen = document.querySelector(".cart-summary");
+
+            // Vaciar el contenido del carrito
+            contenido.innerHTML = "";
+
+            if (carrito.length === 0) {
+                // Mostrar mensaje de carrito vacío
+                contenido.innerHTML = `
+                    <div class="empty-cart">
+                        <img src="Images/empty bag.png" alt="Carrito Vacío">
+                        <h3>Tu carrito está vacío</h3>
+                        <p>No has añadido ningún producto.</p>
+                        <a href="pages/catalogo/catalogo.html">
+                            <button class="shop-button">Catálogo</button>
+                        </a>
+                    </div>`;
+                resumen.style.display = "none";
+                return;
+            }
+
+            // Mostrar productos en el carrito
+            let subtotal = 0;
+            carrito.forEach(producto => {
+                subtotal += producto.precio * producto.cantidad;
+
+                const item = document.createElement("div");
+                item.className = "cart-item";
+                item.innerHTML = `
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                    <div class="cart-item-details">
+                        <h4>${producto.nombre}</h4>
+                        <p>Cantidad: X${producto.cantidad}</p>
+                        <p>Precio: $${(producto.precio * producto.cantidad).toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button onclick="eliminarProducto('${producto.nombre}')">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>`;
+                contenido.appendChild(item);
+            });
+
+            // Calcular totales
+            const iva = subtotal * ivaPorcentaje; // IVA es 15% (variable global)
+            const envio = subtotal >= envioGratisLimite ? 0 : envioFijo; // Envío gratis si supera el límite
+            const total = subtotal + iva + envio;
+
+            // Actualizar los totales en el resumen
+            document.getElementById("subtotal").textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById("iva").textContent = `$${iva.toFixed(2)}`;
+            document.getElementById("envio").textContent = `$${envio.toFixed(2)}`;
+            document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+
+            resumen.style.display = "block"; // Mostrar el resumen si hay productos
+        }
+
+        window.addEventListener("storage", function(event) {
+            if (event.key === "carrito") {
+                console.log("Evento storage detectado:", event.newValue);
+                carrito = JSON.parse(event.newValue || "[]");
+                actualizarCarrito();
+            }
+        });
+
+    </script>
+</body>
+</html>
