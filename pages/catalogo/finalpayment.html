@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Pagos</title>
+</head>
+<body>
+    <nav>
+        <button class="hamburger-menu" onclick="toggleMenu()">
+            <i class="fa fa-bars"></i>
+        </button>
+        <img src="../../Images/logo1.png" alt="logo" class="nav-logo">
+        <div class="off-canvas-menu" id="menu">
+            <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
+            <a href="../../index.html">Inicio</a>
+            <a href="gymshark.html">Gymshark</a>
+            <a href="youngla.html">Youngla</a>
+            <a href="controlled.html">Controlled Insanity</a>
+            <a href="../signIn.html">Iniciar sesion</a>
+        </div>
+        <div class="nav-links" id="menu">
+            <a href="../../index.html">Inicio</a>
+            <a href="gymshark.html">Gymshark</a>
+            <a href="youngla.html">Youngla</a>
+            <a href="controlled.html">Controlled Insanity</a>
+            <a href="../signIn.html">
+                <button class="boton-iniciar">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+            </a>
+        </div>
+    </nav>
+    <script>
+        function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("show");
+        }          
+    </script>
+
+<header class="pay-header">
+    <h1>ATHLEX</h1>
+</header>
+
+<!-- Contenedor de la página de pago -->
+<div class="pay-container">
+    <!-- Formulario de pago -->
+    <section class="pay-payment-form">
+        <h2>Pago de productos</h2>
+        <p>Todas nuestras transferencias son seguras</p>
+    
+        <!-- Opciones de método de pago -->
+        <div class="pay-payment-method">
+            <label class="pay-label">
+                <span>
+                    <input type="radio" name="payment-method" value="card" checked onchange="togglePaymentMethod('card')">
+                    Tarjeta de Credito/Debito
+                </span>
+                <span>
+                    <img src="../../Images/Payment metods/visa-card.svg" alt="Visa">
+                    <img src="../../Images/Payment metods/mastercard-card.svg" alt="MasterCard">
+                    <img src="../../Images/Payment metods/amex-card.svg" alt="American Express">
+                </span>
+            </label>
+            
+            
+            <div id="card-details" class="pay-card-details">
+                <input type="text" placeholder="Card number">
+                <input type="text" placeholder="Expiration date (MM / YY)">
+                <input type="text" placeholder="Security code">
+                <input type="text" placeholder="Name on card">
+            </div>
+        </div>
+    
+        <div class="pay-payment-method">
+            <label class="pay-label">
+                <span>
+                    <input type="radio" name="payment-method" value="paypal" checked onchange="togglePaymentMethod('paypal')">
+                    PayPal
+                </span>
+                <span>
+                    <img src="../../Images/Payment metods/paypal-card.svg" alt="PayPal">
+                </span>
+            </label>
+            <div id="paypal-details" class="pay-paypal-details hidden">
+                <p>Después de hacer clic en "Pagar con PayPal", serás redirigido a PayPal para completar tu compra de manera segura.</p>
+            </div>
+        </div>
+    
+        <!-- Botón de pago -->
+        <button id="pay-button" class="pay-pay-now-btn">PAGAR</button>
+    </section>
+
+    <!-- Resumen del carrito -->
+    <aside class="pay-cart-summary">
+        <h2>Tus productos</h2>
+        <div id="pay-cart-items">
+            <!-- Los productos se generarán dinámicamente -->
+        </div>
+        <div class="pay-summary-line">
+            <p>Subtotal</p>
+            <span id="pay-subtotal">$0.00</span>
+        </div>
+        <div class="pay-summary-line">
+            <p>Envio</p>
+            <span id="pay-shipping">$0.00</span>
+        </div>
+        <div class="pay-summary-line">
+            <p>IVA (15%)</p>
+            <span id="pay-iva">$0.00</span>
+        </div>
+        
+        <div class="pay-summary-line total">
+            <p>Total</p>
+            <span id="pay-total">$0.00</span>
+        </div>
+
+        <!-- Código de descuento -->
+        <div class="pay-discount-code">
+            <input type="text" placeholder="Discount Code">
+            <button type="button">Apply Code</button>
+        </div>
+    </aside>
+</div>
+
+<script>
+    // Cargar productos del carrito
+    document.addEventListener("DOMContentLoaded", function () {
+        const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
+        const cartItemsContainer = document.getElementById("pay-cart-items");
+        const subtotalElement = document.getElementById("pay-subtotal");
+        const shippingElement = document.getElementById("pay-shipping");
+        const ivaElement = document.getElementById("pay-iva");
+        const totalElement = document.getElementById("pay-total");
+
+        let subtotal = 0;
+        const envioFijo = 5; // Tarifa fija de envío
+        const envioGratisLimite = 100; // Límite para envío gratuito
+        const ivaPorcentaje = 0.15; // IVA 15%
+
+        cartItems.forEach(product => {
+            subtotal += product.precio * product.cantidad;
+
+            const item = document.createElement("div");
+            item.classList.add("pay-cart-item");
+            item.innerHTML = `
+                <img src="${product.imagen}" alt="${product.nombre}">
+                <div class="pay-cart-item-details">
+                    <p><strong>${product.nombre}</strong></p>
+                    <p class="pay-cart-item-size">Talla: ${product.talla || "N/A"}</p>
+                </div>
+                <p class="pay-cart-item-price">$${(product.precio * product.cantidad).toFixed(2)}</p>
+            `;
+            cartItemsContainer.appendChild(item);
+        });
+
+        // Calcular IVA y envío
+        const iva = subtotal * ivaPorcentaje;
+        const envio = subtotal >= envioGratisLimite ? 0 : envioFijo;
+        const total = subtotal + iva + envio;
+
+        // Actualizar los elementos del DOM
+        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+        ivaElement.textContent = `$${iva.toFixed(2)}`;
+        shippingElement.textContent = `$${envio.toFixed(2)}`;
+        totalElement.textContent = `$${total.toFixed(2)}`;
+    });
+    
+    function togglePaymentMethod(method) {
+        const cardDetails = document.getElementById('card-details');
+        const paypalDetails = document.getElementById('paypal-details');
+        const payButton = document.getElementById('pay-button');
+
+        if (method === 'card') {
+            cardDetails.classList.remove('hidden');
+            paypalDetails.classList.add('hidden');
+            payButton.textContent = 'PAY NOW';
+        } else if (method === 'paypal') {
+            cardDetails.classList.add('hidden');
+            paypalDetails.classList.remove('hidden');
+            payButton.textContent = 'Pay with PayPal';
+        }
+    }
+
+
+</script>
+</body>
+</html>

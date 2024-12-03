@@ -42,7 +42,7 @@
                 menu.classList.toggle("show");
                 }         
             </script>
-            <!-- Carrito Off-Canvas -->
+    <!-- Carrito Off-Canvas -->
     <div id="cart-off-canvas" class="cart-off-canvas">
         <div class="off-canvas-header">
             <h2>Carrito</h2>
@@ -50,7 +50,7 @@
         </div>
         <div class="off-canvas-content">
             <div class="empty-cart">
-                <img src="../Images/empty bag.png" alt="Carrito Vacío">
+                <img src="../../Images/empty-bag.svg" alt="Carrito Vacío">
                 <h3>Tu carrito está vacío</h3>
                 <p>No has añadido ningún producto.</p>
                 <a href="pages/catalogo/catalogo.html">
@@ -59,15 +59,36 @@
             </div>
         </div>
         <div class="cart-summary">
-            <p>Subtotal: <span id="subtotal">$0.00</span></p>
-            <p>IVA (15%): <span id="iva">$0.00</span></p>
-            <p>Envío: <span id="envio">$0.00</span></p>
-            <p><strong>Total: <span id="total">$0.00</span></strong></p>
-            <button class="checkout-btn">Checkout</button>
-            <p class="note">Envío gratuito en compras mayores a $100.</p>
+            <div class="summary-line">
+                <p>Subtotal:</p>
+                <span id="subtotal">$0.00</span>
+            </div>
+            <div class="summary-line">
+                <p>IVA (15%):</p>
+                <span id="iva">$0.00</span>
+            </div>
+            <div class="summary-line">
+                <p>Envío:</p>
+                <span id="envio">$0.00</span>
+            </div>
+            <div class="summary-line total">
+                <p><strong>Total:</strong></p>
+                <span id="total"><strong>$0.00</strong></span>
+            </div>
+            <button class="checkout-btn">
+                <i class="fa fa-shopping-bag"></i> Checkout
+            </button>
+            <div class="payment-methods">
+                <img src="../../Images/Payment metods/visa-card.svg" alt="Visa">
+                <img src="../../Images/Payment metods/mastercard-card.svg" alt="MasterCard">
+                <img src="../../Images/Payment metods/amex-card.svg" alt="American Express">
+                <img src="../../Images/Payment metods/paypal-card.svg" alt="PayPal">
+                <img src="../../Images/Payment metods/applepay-card.svg" alt="Apple Pay">
+            </div>
         </div>
+        
     </div>
-    </div>
+    
     <div class="log-main-container">
         <div class="login-container">
             <img src="../Images/logo1-nb.png" alt="Logo" class="logo">
@@ -75,56 +96,70 @@
             <p class="Sign-p">Una cuenta para todas las aplicaciones, para facilitar las cosas.</p>
             <form id="myForm" action="#" method="post" class="login-form">
                 <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Nombre*" required>
+                    <span class="form-text">Nombre*</span>
+                    <input type="text" id="name" name="name" required>
                 </div>
-                                
+            
                 <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Correo electrónico*" required>
+                    <span class="form-text">Correo electrónico*</span>
+                    <input type="email" id="email" name="email" required>
                 </div>
+            
                 <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Contraseña*" required>
+                    <span class="form-text">Contraseña*</span>
+                    <input type="password" id="password" name="password" required>
                 </div>
+            
                 <div class="form-group">
-                    <input type="password" id="repeat-password" name="repeat-password" placeholder="Repita su contraseña*" required>
+                    <span class="form-text">Repita su contraseña*</span>
+                    <input type="password" id="repeat-password" name="repeat-password" required>
                 </div>
-                
+            
                 <div class="form-group">
-                    <input type="date" id="dob" name="dob" placeholder="Fecha de nacimiento*" required>
+                    <span class="form-text">Fecha de nacimiento*</span>
+                    <input type="date" id="dob" name="dob" required>
                 </div>
-                
+            
                 <div class="form-group">
+                    <span class="form-text">Género*</span>
                     <select id="gender" name="gender" required>
-                        <option value="" disabled selected>Género*</option>
+                        <option value="" disabled selected>Selecciona un género</option>
                         <option value="Hombre">Hombre</option>
                         <option value="Mujer">Mujer</option>
                         <option value="Otro">Otro</option>
                     </select>
                 </div>
+            
                 <div class="form-group">
+                    <span class="form-text">Talla favorita*</span>
                     <select id="size" name="size" required>
-                        <option value="" disabled selected>Talla favorita*</option>
+                        <option value="" disabled selected>Selecciona una talla</option>
                         <option value="s">Small</option>
                         <option value="m">Medium</option>
                         <option value="l">Large</option>
                         <option value="xl">ExtraLarge</option>
                     </select>
                 </div>
-                
-                <h3> Datos para factura </h3>
+            
+                <h3>Datos para factura</h3>
                 <div class="form-group">
-                    <input type="text" id="cedula" name="cedula" placeholder="Número de cédula*" required>
+                    <span class="form-text">Número de cédula*</span>
+                    <input type="text" id="cedula" name="cedula" required>
                 </div>
+            
                 <div class="form-group">
-                    <textarea id="address" name="address" placeholder="Dirección de envío*" rows="4" required></textarea>
+                    <span class="form-text">Dirección de envío*</span>
+                    <textarea id="address" name="address" rows="4" required></textarea>
                 </div>
+            
                 <div class="form-group">
-                    <input type="text" id="phone" name="phone" placeholder="Número de teléfono*" pattern="[0-9]{10}" required>
+                    <span class="form-text">Número de teléfono*</span>
+                    <input type="text" id="phone" name="phone" pattern="[0-9]{10}" required>
                 </div>
-                
-                
-                
+            
                 <button type="submit" class="login-button">CREAR UNA CUENTA</button>
             </form>
+            
             <script src="app.js"></script>
             <p class="signup-text">¿Ya tiene una cuenta? <a href="signIn.html">Inicia Sesión</a></p>
         </div>
@@ -308,7 +343,7 @@
             // Mostrar mensaje de carrito vacío
             contenido.innerHTML = `
                 <div class="empty-cart">
-                    <img src="../Images/empty bag.png" alt="Carrito Vacío">
+                    <img src="../Images/empty-bag.svg" alt="Carrito Vacío">
                     <h3>Tu carrito está vacío</h3>
                     <p>No has añadido ningún producto.</p>
                     <a href="pages/catalogo/catalogo.html">

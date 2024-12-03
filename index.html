@@ -13,19 +13,17 @@
     <link rel="stylesheet" href="'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'">
     
 </head>
-<body>
+<body class="light-mode">
     <div> <!-- Header -->
         <div class="hed" style="font-family: 'Lato', sans-serif"> <!-- Header 1 -->
-            <p style="color: aliceblue;">Lo que necesitas para vestir en el gimnasio</p>
+            <p>Lo que necesitas para vestir en el gimnasio</p>
         </div>
     </div>
-    
+    <div class="header-title">
+        <h1>ATHELX</h1>
+    </div> 
+
     <div>   <!-- Header 2 -->   
-        <div> <!-- Titulo pag -->
-            <header>
-                <h1>ATHELX</h1>
-            </header>
-        </div>
         <div>   <!-- Navegacion -->
             <nav>
                 <button class="hamburger-menu" onclick="toggleMenu()">
@@ -48,10 +46,15 @@
                             <i class="fa-solid fa-user"></i>
                         </button>
                     </a>
+                </div>  
+                <div class="nav-buttons">
+                    <button class="theme-toggle" id="theme-toggle">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                    </button>
+                    <button class="cart-icon" onclick="toggleCart()">
+                        <i class="fa fa-shopping-cart"></i>
+                    </button>
                 </div>
-                <button class="cart-icon" onclick="toggleCart()">
-                    <i class="fa fa-shopping-cart"></i>
-                </button>
             </nav>
             <script>
                 function toggleMenu() {
@@ -67,7 +70,7 @@
                 </div>
                 <div class="off-canvas-content">
                     <div class="empty-cart">
-                        <img src="Images/empty bag.png" alt="Carrito Vacío">
+                        <img src="Images/empty-bag.svg" alt="Carrito Vacío">
                         <h3>Tu carrito está vacío</h3>
                         <p>No has añadido ningún producto.</p>
                         <a href="pages/catalogo/catalogo.html">
@@ -76,13 +79,34 @@
                     </div>
                 </div>
                 <div class="cart-summary">
-                    <p>Subtotal: <span id="subtotal">$0.00</span></p>
-                    <p>IVA (15%): <span id="iva">$0.00</span></p>
-                    <p>Envío: <span id="envio">$0.00</span></p>
-                    <p><strong>Total: <span id="total">$0.00</span></strong></p>
-                    <button class="checkout-btn">Checkout</button>
-                    <p class="note">Envío gratuito en compras mayores a $100.</p>
+                    <div class="summary-line">
+                        <p>Subtotal:</p>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-line">
+                        <p>IVA (15%):</p>
+                        <span id="iva">$0.00</span>
+                    </div>
+                    <div class="summary-line">
+                        <p>Envío:</p>
+                        <span id="envio">$0.00</span>
+                    </div>
+                    <div class="summary-line total">
+                        <p><strong>Total:</strong></p>
+                        <span id="total"><strong>$0.00</strong></span>
+                    </div>
+                    <button class="checkout-btn">
+                        <i class="fa fa-shopping-bag"></i> Checkout
+                    </button>
+                    <div class="payment-methods">
+                        <img src="../../Images/Payment metods/visa-card.svg" alt="Visa">
+                        <img src="../../Images/Payment metods/mastercard-card.svg" alt="MasterCard">
+                        <img src="../../Images/Payment metods/amex-card.svg" alt="American Express">
+                        <img src="../../Images/Payment metods/paypal-card.svg" alt="PayPal">
+                        <img src="../../Images/Payment metods/applepay-card.svg" alt="Apple Pay">
+                    </div>
                 </div>
+                
             </div>
            
             <div style="font-family: 'Oswald', sans-serif">   <!-- Main Page -->
@@ -177,14 +201,14 @@
         <div class="footer-container">
             <!-- Sección de Ayuda -->
             <div class="footer-column">
-                <h3>HELP</h3>
+                <h3>AYUDA</h3>
                 <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Delivery Information</a></li>
-                    <li><a href="#">Returns Policy</a></li>
-                    <li><a href="#">Make A Return</a></li>
-                    <li><a href="#">Orders</a></li>
-                    <li><a href="#">Submit a Fake</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="#">Infomacion de Envío</a></li>
+                    <li><a href="#">Politica de Devolución</a></li>
+                    <li><a href="#">Hacer una Devolución</a></li>
+                    <li><a href="#">Carrito</a></li>
+                    <li><a href="#">Enviar una replica</a></li>
                 </ul>
             </div>
     
@@ -229,7 +253,7 @@
     
         <!-- Términos -->
         <div class="footer-bottom">
-            <p>© 2024 | ATHLEX Limited | All Rights Reserved. | We Do Gym.</p>
+            <h4>© 2024 | ATHLEX Limited | All Rights Reserved. | We Do Gym.</h4>
             <ul>
                 <li><a href="#">Terms and Conditions</a></li>
                 <li><a href="#">Terms of Use</a></li>
@@ -418,7 +442,7 @@
                 // Mostrar mensaje de carrito vacío
                 contenido.innerHTML = `
                     <div class="empty-cart">
-                        <img src="Images/empty bag.png" alt="Carrito Vacío">
+                        <img src="Images/empty-bag.svg" alt="Carrito Vacío">
                         <h3>Tu carrito está vacío</h3>
                         <p>No has añadido ningún producto.</p>
                         <a href="pages/catalogo/catalogo.html">
@@ -474,5 +498,7 @@
         });
 
     </script>
+
+    <script src="script.js"></script>
 </body>
 </html>

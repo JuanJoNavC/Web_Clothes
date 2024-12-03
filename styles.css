@@ -10,8 +10,279 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+    transition: background-color 0.3s, color 0.3s;    
 }
+
+/* Modo Claro */
+body.light-mode {
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Dark Mode */
+/* Fondos y textos principales */
+body.dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+/* Enlaces */
+body.dark-mode a {
+    color: #ffffff;
+}
+
+body.dark-mode a:hover {
+    color: #d3d3d3;
+}
+
+/* Encabezado */
+body.dark-mode header {
+    background-color: #333;
+    color: #ffffff;
+}
+
+/* Footer Dark Mode */
+body.dark-mode .footer {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+body.dark-mode .footer-column h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .footer-column ul li a {
+    color: #ffffff;
+}
+
+body.dark-mode .footer-column ul li a:hover {
+    color: #919191;
+}
+
+body.dark-mode .footer-bottom ul li a {
+    color: #ffffff;
+}
+
+body.dark-mode .footer-bottom ul li a:hover {
+    color: #919191;
+}
+
+body.dark-mode .footer-social a {
+    color: #ffffff;
+}
+
+body.dark-mode .footer-social a:hover {
+    color: #919191;
+}
+
+/* Nav Dark Mode */
+body.dark-mode nav {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .cart-icon i {
+    color: #f0f0f0;
+}
+
+body.dark-mode .nav-links a {
+    color: #f0f0f0;
+}
+
+body.dark-mode .nav-links a:hover {
+    color: #bbb;
+}
+
+body.dark-mode .boton-iniciar i {
+    color: #f0f0f0;
+}
+
+/* Off Canvas Dark Mode */
+body.dark-mode .off-canvas-menu {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+body.dark-mode .off-canvas-menu a {
+    color: #f0f0f0;
+}
+
+body.dark-mode .off-canvas-menu a:hover {
+    background-color: #444;
+}
+
+body.dark-mode .off-canvas-menu a:not(.close-btn)::after {
+    color: #f0f0f0;
+}
+
+body.dark-mode .theme-toggle {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+body.dark-mode .hamburger-menu {
+    color: #f0f0f0;
+}
+
+body.dark-mode .product-card p {
+    color: #fff; /* Color de texto blanco en modo oscuro */
+}
+
+body.dark-mode .price {
+    color: #fff; /* Precio en blanco en modo oscuro */
+}
+
+/* Resto de las reglas para las tarjetas de producto (ya definidas previamente) */
+body.dark-mode .product-card {
+    background-color: #333;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+}
+
+
+/* Estilos generales del botón de cambio de tema */
+.theme-toggle {
+    font-size: 1em;  /* Tamaño del ícono */
+    border: none;
+    cursor: pointer;
+    background-color: transparent;  /* Fondo transparente */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+/* Dark Mode for Header Title */
+body.dark-mode .header-title {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;  /* Cubre todo el ancho de la pantalla */
+    background-color: #121212;  /* Fondo oscuro */
+    color: #e0e0e0;  /* Color de texto más suave y claro */
+    text-align: center;  /* Centrado del texto */
+    padding: 25px 0;  /* Espaciado superior e inferior */
+    font-size: 1.2em;  /* Tamaño de fuente */
+    font-weight: bold;  /* Fuente en negrita */
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+body.dark-mode .header-title h1 {
+    margin: 0;  /* Eliminar el margen predeterminado */
+}
+
+/*Carrito dark mode*/
+
+body.dark-mode .cart-off-canvas {
+    background-color: #333; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+}
+
+/* Encabezado del carrito (con o sin productos) */
+body.dark-mode .off-canvas-header {
+    background-color: #444; /* Fondo ligeramente más oscuro */
+    color: #fff; /* Texto blanco */
+}
+
+body.dark-mode .off-canvas-header h2 {
+    font-size: 1.5rem;
+}
+
+/* Botón de cierre */
+body.dark-mode .close-button {
+    color: #fff; /* Botón blanco */
+}
+
+/* Contenido del carrito vacío */
+body.dark-mode .empty-cart h3 {
+    color: #fff; /* Título en blanco */
+}
+
+body.dark-mode .empty-cart p {
+    color: #ccc; /* Texto en gris claro */
+}
+
+body.dark-mode .shop-button {
+    background-color: #444; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    border-radius: 30px;
+}
+
+body.dark-mode .shop-button:hover {
+    transform: scale(1.05);
+    background-color: #555; /* Cambio de color al hacer hover */
+}
+
+/* Carrito con productos */
+body.dark-mode .cart-item {
+    background-color: #333; /* Fondo oscuro para cada producto */
+    border-bottom: 1px solid #ffffff; /* Borde gris oscuro */
+}
+
+body.dark-mode .cart-item img {
+    border-radius: 5px;
+}
+
+body.dark-mode .cart-item-details h4 {
+    color: #fff; /* Título en blanco */
+}
+
+body.dark-mode .cart-item-details p {
+    color: #ccc; /* Texto gris claro */
+}
+
+body.dark-mode .cart-item-actions button {
+    color: #d9534f; /* Color de eliminar (rojo) */
+}
+
+/* Resumen del carrito */
+body.dark-mode .cart-summary {
+    background: #222; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+}
+
+body.dark-mode .summary-line {
+    border-bottom: 1px solid #555; /* Borde gris oscuro */
+}
+
+body.dark-mode .checkout-btn {
+    background: #444; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+}
+
+body.dark-mode .checkout-btn:hover {
+    background: #555; /* Fondo más claro al hacer hover */
+}
+
+/* Texto en el resumen del carrito (Subtotal, IVA, Envío, Total) en modo oscuro */
+body.dark-mode .cart-summary p {
+    color: #fff; /* Texto blanco */
+}
+
+body.dark-mode .summary-line p {
+    color: #fff; /* Texto blanco para las líneas de resumen */
+}
+
+body.dark-mode .summary-line span {
+    color: #fff; /* Texto blanco para los valores */
+}
+
+body.dark-mode .summary-line.total p {
+    color: #fff; /* Color blanco para el total */
+}
+
+body.dark-mode .summary-line.total span {
+    color: #fff; /* Color blanco para el total */
+}
+
+
+/*End Dark Mode*/
+
+
 .hed{
         background-color: #222323;
         color: #fff;
@@ -19,16 +290,29 @@ body {
         padding: 0.1em;
         font-size: small;
 }
-header{
-        background-color: #ffffff;
-        font-weight: bold;
-        font-size: 1.2em; /* Tamaño más pequeño */
-        color: #000000;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
+.hed p{
+    color: #fff;
 }
+
+/* Estilo para el header-title */
+.header-title {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;  /* Cubre todo el ancho de la pantalla */
+    background-color: white;  /* Fondo blanco */
+    color: #000000;  /* Color de texto negro */
+    text-align: center;  /* Centrado del texto */
+    padding: 25px 0;  /* Espaciado superior e inferior */
+    font-size: 1.2em;  /* Tamaño de fuente */
+    font-weight: bold;  /* Fuente en negrita */
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.header-title h1 {
+    margin: 0;  /* Eliminar el margen predeterminado */
+}
+
+
 
 /*Nav Bar*//*----------------------------------------------------------------*/
 nav {
@@ -45,6 +329,14 @@ nav {
 nav img.nav-logo {
     height: 30px;
 }
+
+.nav-buttons {
+    display: flex;           
+    justify-content: flex-end; 
+    gap: 15px;                
+    align-items: center;
+}
+
 
 nav .cart-icon {
     font-size: 1em; /* Tamaño del contenedor */
@@ -172,9 +464,9 @@ nav .cart-icon {
 }
 
 .off-canvas-content {
-    padding: 15px;
+    padding: 20px;
     overflow-y: auto;
-    max-height: calc(100% - 150px);
+    max-height: calc(100vh - 360px);
 }
 
 /* Botón de cierre */
@@ -253,8 +545,12 @@ a {
 }
 
 .cart-item img {
-    max-width: 80px;
-    border-radius: 5px;
+    width: 80px; /* Tamaño fijo para el ancho */
+    height: 100px; /* Tamaño fijo para la altura */
+    border-radius: 5px; /* Bordes redondeados */
+    object-fit: cover; /* Recorta la imagen para llenar el espacio */
+    object-position: top; /* Muestra la parte superior de la imagen */
+    overflow: hidden; /* Asegura que el contenido recortado no se desborde */
 }
 
 .cart-item-details {
@@ -286,40 +582,70 @@ a {
 }
 
 .cart-summary {
-    padding: 15px;
+    padding: 10px;
     border-top: 1px solid #ddd;
     background: #f9f9f9;
-    position: sticky; /* Fijo al desplazarse */
-    bottom: 0; /* Posición en la parte inferior */
+    position: sticky; /* Bloquear al alcanzar el límite */
+    bottom: 0; /* Fijar en la parte inferior del carrito */
+    z-index: 10; /* Asegurar que esté encima del contenido */
 }
+
 
 .cart-summary p {
     margin: 5px 0;
     font-size: 14px;
 }
 
-.checkout-btn {
-    display: block;
-    width: 100%;
-    padding: 12px 20px;
-    background: #000; /* Fondo negro sólido */
-    color: #fff; /* Texto blanco */
-    border: none; /* Sin bordes */
-    border-radius: 8px; /* Bordes redondeados */
-    text-align: center;
-    cursor: pointer;
+.summary-line {
+    display: flex;
+    justify-content: space-between; /* Distribuye texto y valor */
+    align-items: center;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.summary-line.total {
     font-size: 16px;
     font-weight: bold;
-    transition: all 0.3s ease; /* Transición suave */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin-top: 10px;
+}
+
+.summary-line span {
+    text-align: right; /* Asegura alineación correcta */
+}
+
+.checkout-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+    background: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin bordes */
+    border-radius: 25px; /* Bordes redondeados */
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: background 0.3s ease, transform 0.3s ease; /* Transición suave */
 }
 
 .checkout-btn:hover {
     background: #333; /* Fondo negro más claro al pasar el cursor */
-    color: #fff; /* Mantener texto blanco */
-    transform: translateY(-2px); /* Elevar el botón */
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4); /* Sombra más intensa */
+    transform: scale(1.02); /* Efecto de zoom */
 }
+
+.checkout-btn i {
+    margin-right: 10px; /* Separación del icono */
+}
+
+.cart-summary .payment-methods img {
+    width: 35px; /* Tamaño más pequeño */
+    height: auto; /* Mantener proporción */
+}
+
 
 
 
@@ -941,12 +1267,13 @@ p {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin: 20px 0;
+    margin-top: 15px;
 }
 
 .payment-methods img {
     width: 50px;
     height: auto;
+    transition: transform 0.2s ease; /* Efecto de zoom al pasar */
 }
 
 .footer-bottom {
@@ -1480,6 +1807,15 @@ p {
 }
 
 /* Form Styles */
+.form-text {
+    display: block;
+    font-size: 0.9em;  /* Tamaño de texto más pequeño */
+    color: #333;  /* Color del texto */
+    margin-bottom: 5px;
+    text-align: left; /* Alineación del texto a la izquierda */
+}
+
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -1640,3 +1976,223 @@ textarea:focus {
 }
 
 
+/*Final payment*/
+/* Header */
+.pay-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #fff;
+}
+
+.pay-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Contenedor de la página */
+.pay-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.pay-label {
+    display: flex; /* Usa flexbox para alinear los elementos */
+    align-items: center; /* Alinea verticalmente los elementos al centro */
+    justify-content: space-between; /* Empuja el texto hacia la izquierda y las imágenes hacia la derecha */
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Hace el texto más destacado */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    width: 100%; /* Asegura que el contenedor ocupe todo el espacio disponible */
+}
+
+.pay-label img {
+    height: 20px; /* Ajusta la altura de las imágenes */
+    width: auto; /* Mantiene las proporciones de las imágenes */
+    margin-left: 10px; /* Añade espacio entre las imágenes */
+}
+
+
+
+.pay-payment-form {
+    flex: 1;
+    padding: 20px;
+}
+
+.pay-payment-form h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pay-payment-form p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.pay-payment-method {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+
+
+.pay-card-details input {
+    margin: 5px 5px 15px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Asegura que padding y borde se incluyan en el ancho */
+}
+
+.pay-card-details input:first-child, 
+.pay-card-details input:last-child {
+    width: 100%;
+}
+
+.pay-card-details input:nth-child(2),
+.pay-card-details input:nth-child(3) {
+    width: calc(50% - 10px);
+}
+
+.pay-paypal-details.hidden {
+    display: none;
+}
+
+.pay-paypal-details {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.pay-pay-now-btn {
+    background: linear-gradient(to right, #000000 50%, #ffffff 50%);
+    background-size: 200% 100%;
+    color: #ffffff; /* Color inicial del texto */
+    font-weight: bold;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-position 0.4s ease-in-out, color 0.4s ease-in-out, transform 0.2s;
+    width: 100%; /* Coincide con el ancho de los inputs */
+    box-sizing: border-box; /* Consistencia de tamaño */
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5); /* Asegura que el texto sea legible */
+}
+
+.pay-pay-now-btn:hover {
+    background-position: -100% 0; /* Efecto de desplazamiento */
+    color: #000000; /* Cambia el color del texto */
+    transform: scale(1.05); /* Efecto de aumento */
+}
+
+.pay-pay-now-btn:active {
+    transform: scale(0.98); /* Pequeña contracción */
+    background-color: #444444; /* Color fijo para el clic */
+    color: #ffffff;
+}
+
+.hidden {
+    display: none;
+}
+
+.pay-card-details input:last-child {
+    margin-right: 0;
+}
+
+.pay-payment-method img {
+    width: 40px;
+    height: auto;
+}
+
+
+.pay-cart-summary {
+    flex: 1;
+    min-width: 300px;
+    border-left: 1px solid #ddd;
+    padding-left: 20px;
+}
+
+.pay-cart-summary h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pay-cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.pay-cart-item img {
+    width: 80px; /* Tamaño más grande */
+    height: 100px; /* Tamaño más grande */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.pay-cart-item-details {
+    flex: 1;
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding-left: 10px;
+}
+
+.pay-cart-item-price {
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pay-summary-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.pay-summary-line.total {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.pay-discount-code {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pay-discount-code input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.pay-discount-code button {
+    margin-top: 10px;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.pay-discount-code button:hover {
+    background: #333;
+}

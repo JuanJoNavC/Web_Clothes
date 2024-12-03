@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+
+
 // Configuración de la base de datos
 const dbConfig = {
     host: '127.0.0.1',
