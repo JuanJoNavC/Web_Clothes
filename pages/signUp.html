@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
 </head>
-<body>
+<body style="background: linear-gradient(135deg, #ececec, #ffffff);">
     <div>
         <nav>
             <button class="hamburger-menu" onclick="toggleMenu()">
@@ -32,9 +32,6 @@
                     </button>
                 </a>
             </div>
-            <button class="cart-icon" onclick="toggleCart()">
-                <i class="fa fa-shopping-cart"></i>
-            </button>
         </nav>
             <script>
                 function toggleMenu() {
@@ -107,12 +104,18 @@
             
                 <div class="form-group">
                     <span class="form-text">Contraseña*</span>
-                    <input type="password" id="password" name="password" required>
+                    <div class="form-group password-container">
+                        <input type="password" id="password" name="password" required>
+                        <i id="togglePassword" class="fas fa-eye"></i>
+                    </div>
                 </div>
             
                 <div class="form-group">
                     <span class="form-text">Repita su contraseña*</span>
-                    <input type="password" id="repeat-password" name="repeat-password" required>
+                    <div class="form-group password-container">
+                        <input type="password" id="repeat-password" name="repeat-password" required>
+                        <i id="togglePassword2" class="fas fa-eye"></i>
+                    </div>
                 </div>
             
                 <div class="form-group">
@@ -166,14 +169,20 @@
     </div>
     
     <script>
-        function togglePasswordVisibility() {
-            const passwordField = document.getElementById("password");
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-            } else {
-                passwordField.type = "password";
-            }
-        }
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('password');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash'); // Cambia el ícono
+        });
+
+        // Toggle para el campo de repetir contraseña
+        document.getElementById('togglePassword2').addEventListener('click', function () {
+            const repeatPasswordField = document.getElementById('repeat-password');
+            const type = repeatPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            repeatPasswordField.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash'); // Cambia el ícono
+        });
     </script>
 
 <script>
@@ -399,5 +408,6 @@
     });
 
 </script>
+
 </body>
 </html>

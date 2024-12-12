@@ -1,7 +1,8 @@
+// Add event listener to the form
 document.getElementById('myForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevenir el envío del formulario
+    event.preventDefault(); // Prevent form submission
 
-    // Capturar los valores del formulario
+    // Capture the form values
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -13,7 +14,7 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
     const address = document.getElementById('address').value.trim();
     const phone = document.getElementById('phone').value.trim();
 
-    // Validar los campos
+    // Validate the fields
     if (!name || !validateName(name)) {
         alert("Por favor, ingrese un nombre válido (sin números ni caracteres especiales).");
         return;
@@ -64,7 +65,7 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
         return;
     }
 
-    // Si todas las validaciones son correctas, enviar los datos
+    // If all validations pass, submit the data
     fetch('/submit', {
         method: 'POST',
         headers: {
@@ -77,27 +78,43 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
         .catch(error => console.error('Error: ', error));
 });
 
-// Función para validar el nombre (solo letras y espacios)
+// Load saved form data from sessionStorage when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('myForm');
+    const inputs = form.querySelectorAll("input, select, textarea");
+
+    inputs.forEach((input) => {
+        const savedValue = sessionStorage.getItem(input.id); // Retrieve saved value by input's id
+        if (savedValue) {
+            input.value = savedValue; // Set the value in the field
+        }
+    });
+});
+
+// Save form data to sessionStorage when fields are changed
+document.querySelectorAll("#myForm input, #myForm select, #myForm textarea").forEach((field) => {
+    field.addEventListener("input", (event) => {
+        sessionStorage.setItem(event.target.id, event.target.value); // Save field value
+    });
+});
+
+// Validation functions
 function validateName(name) {
-    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/; // Permite letras (mayúsculas, minúsculas) y espacios, con tildes
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/; // Allow letters (uppercase, lowercase) and spaces, with accents
     return regex.test(name);
 }
 
-
-// Función para validar el correo electrónico
 function validateEmail(email) {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Formato básico de correo
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Basic email format
     return regex.test(email);
 }
 
-// Función para validar el teléfono (10 dígitos)
 function validatePhone(phone) {
-    const regex = /^[0-9]{10}$/; // Solo 10 dígitos numéricos
+    const regex = /^[0-9]{10}$/; // Only 10 numeric digits
     return regex.test(phone);
 }
 
-// Función para validar la cédula (máximo 10 caracteres numéricos)
 function validateCedula(cedula) {
-    const regex = /^[0-9]{1,10}$/; // Solo números, máximo 10 caracteres
+    const regex = /^[0-9]{1,10}$/; // Only numbers, max 10 characters
     return regex.test(cedula);
 }

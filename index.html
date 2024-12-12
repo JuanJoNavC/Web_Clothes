@@ -95,7 +95,7 @@
                         <p><strong>Total:</strong></p>
                         <span id="total"><strong>$0.00</strong></span>
                     </div>
-                    <button class="checkout-btn">
+                    <button class="checkout-btn" id="checkoutButton">
                         <i class="fa fa-shopping-bag"></i> Checkout
                     </button>
                     <div class="payment-methods">
@@ -181,21 +181,129 @@
                     <a href="pages/catalogo/catalogo.html">
                         <button class="add-to-cart-btn">Ver mas..</button>
                     </a>
-                </main>  
+                </main>
             </div>
-        </div>
-        <div class="video-fullscreen">
-            <video autoplay muted loop playsinline>
-                <source src="Videos/Video-2.mp4" type="video/mp4">
-                Tu navegador no soporta la etiqueta de video.
-            </video>
-            <div class="overlay-text">
-                Mejora tu estilo con <span>ATHLEX</span>
+
+            <div class="video-fullscreen">
+                <video autoplay muted loop playsinline>
+                    <source src="Videos/Video-2.mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                </video>
+                <div class="overlay-text">
+                    Mejora tu estilo con <span>ATHLEX</span>
+                </div>
             </div>
+
+            
+            <!-- Content cards -->
+            <div class="cont-card-container">
+                <!-- Card 1 -->
+                <div class="cont-card">
+                  <img src="Images/General/Sub_BF_MN.webp" alt="Men's New In" class="cont-card-image">
+                  <div class="overlay">
+                    <a href="gymshark.html" class="overlay-button">GYMSHARK</a>
+                  </div>
+                </div>
+            
+                <!-- Card 2 -->
+                <div class="cont-card">
+                  <img src="Images/General/Sub_BF_Tshrt.webp" alt="Women's New In" class="cont-card-image">
+                  <div class="overlay">
+                    <a href="youngla.html" class="overlay-button">YOUNGLA</a>
+                  </div>
+                </div>
+            
+                <!-- Card 3 -->
+                <div class="cont-card">
+                  <img src="Images/General/Sub_BF_Oversized2.webp" alt="Unconquerable Strength" class="cont-card-image">
+                  <div class="overlay">
+                    <a href="controlled.html" class="overlay-button">CONTROLLED INSANITY</a>
+                  </div>
+                </div>
+            </div>
+
+
+            <!--Reproductos de video-->
+    
+            <div class="vid-container">
+                <h1 class="vid-title">Guía de Shorts</h1>
+                <div class="vid-selector">
+                    <button class="vid-btn" data-video="Videos/lifting.mp4">Lifting Shorts</button>
+                    <button class="vid-btn" data-video="Videos/restday.mp4">Rest day Shorts</button>
+                    <button class="vid-btn" data-video="Videos/running.mp4">Running Shorts</button>
+                    <button class="vid-btn" data-video="Videos/100.mp4">PR XD</button>
+                </div>
+                <div class="vid-player">
+                    <div class="vid-wrapper">
+                        <video class="vid-player__video" loop>
+                            <source src="Videos/MENS_SHORTS_HERO_VIDEO_-_16x9_1.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                        <div class="vid-controls">
+                            <div class="vid-controls-left">
+                                <button class="vid-control-btn" id="backward"><i class="fas fa-backward"></i></button>
+                                <button class="vid-control-btn" id="play-pause"><i class="fas fa-play"></i></button>
+                                <button class="vid-control-btn" id="forward"><i class="fas fa-forward"></i></button>
+                                <button class="vid-control-btn" id="mute-unmute"><i class="fas fa-volume-up"></i></button>
+                            </div>
+                            <button class="vid-control-btn vid-control-fs" id="fullscreen-toggle"><i class="fas fa-expand"></i></button>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="vid-description">
+                    <p>
+                        Encuentra los mejores shorts para cada tipo de entrenamiento. 
+                        Desde <strong>lifting</strong> hasta <strong>running</strong>, nuestra colección está diseñada para brindarte comodidad, soporte y estilo en el gimnasio y más allá.
+                    </p>
+                </div>
+
+            </div>
+            <script src="video.js"></script>
+            
+            <div class="ind-banner">
+                <img src="Images/gymsharkimg/xmas.avif" alt="banner" class="banner-img">
+                <div class="ind-banner-content">
+                  <h2>NAVIDAD LLEGO A ATHLEX</h2>
+                  <p style="color: white;">Regálale a tus seres queridos que aman el gimnasio algo que realmente usarán</p>
+                </div>
+            </div>
+            <div class="cont-container">
+                <div class="cont-linea-superior"></div>
+                <div class="cont-contenido">
+                    <h2>Ropa de Gimnasio y Entrenamiento para Hombres</h2>
+                    <p class="cont-texto">
+                        En Athelx encuentras ropa deportiva de las mejores marcas, 
+                        diseñada para acompañarte en cada entrenamiento. Desde camisetas 
+                        y shorts hasta joggers y accesorios, tenemos lo que necesitas para 
+                        rendir al máximo con estilo y comodidad.
+                    </p>
+                </div>
+                <div class="cont-contenido">
+                    <h3>Equipo de Entrenamiento para Cada Movimiento</h3>
+                    <p class="cont-texto">
+                        Athelx te conecta con las mejores marcas en ropa y accesorios de gimnasio. 
+                        Desde camisetas que absorben el sudor hasta shorts flexibles, tenemos lo que 
+                        necesitas para moverte con comodidad y estilo en cada entrenamiento.
+                    </p>
+                </div>
+                <div class="cont-contenido">
+                    <h4>Ropa Deportiva para Todo Atleta</h4>
+                    <p class="cont-texto">
+                        Sea cual sea tu deporte, Athelx tiene las mejores marcas para ti. 
+                        Encuentra prendas para entrenamientos intensos, carreras o yoga, y 
+                        prepárate para rendir al máximo en cualquier disciplina.
+                    </p>
+                </div>
+                <div class="cont-linea-inferior"></div>
+            </div>
+            <div class="ind-banner">
+                <img src="Images/younglaimg/YLA_DEC_Coming_Soon.jpg" alt="banner" class="banner-img">
+            </div>            
         </div>
     </div>
-    
 
+    
+ 
     <!--Footer -->
     <footer class="footer">
         <div class="footer-container">

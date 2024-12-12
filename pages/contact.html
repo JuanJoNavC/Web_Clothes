@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
 </head>
-<body class="contact-body" >
-    <header class="contact-header">
+<body  class="light-mode" class="contact-body" >
+    <div class="header-title" style="background-color: rgb(0, 0, 0); color: white;">
         <h1>Contáctanos</h1>
-        <p>Nos encantaría escuchar de ti</p>
-    </header>
-    
+        <p style="color: white;">Nos encantaría escuchar de ti</p>
+    </div>     
     <nav>
         <button class="hamburger-menu" onclick="toggleMenu()">
             <i class="fa fa-bars"></i>
@@ -35,9 +34,14 @@
                 </button>
             </a>
         </div>
-        <button class="cart-icon" onclick="toggleCart()">
-            <i class="fa fa-shopping-cart"></i>
-        </button>
+        <div class="nav-buttons">
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+            </button>
+            <button class="cart-icon" onclick="toggleCart()">
+                <i class="fa fa-shopping-cart"></i>
+            </button>
+        </div>
     </nav>
     <script>
         function toggleMenu() {
@@ -78,7 +82,7 @@
                 <p><strong>Total:</strong></p>
                 <span id="total"><strong>$0.00</strong></span>
             </div>
-            <button class="checkout-btn">
+            <button class="checkout-btn" id="checkoutButton">
                 <i class="fa fa-shopping-bag"></i> Checkout
             </button>
             <div class="payment-methods">
@@ -111,7 +115,7 @@
         <h2>Visítanos en nuestra tienda física</h2>
         <p>Dirección: Calle Fitness, 123, Ciudad Deportiva</p>
         <p>Horario: Lunes a Viernes, 9:00 AM - 8:00 PM</p>
-        <img class="contact-scalable" src="../Images/Athlex Store.jpg" alt="Store">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8393.973047322928!2d-0.15448859907529233!3d51.51251467631292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487605e2ec399985%3A0x98654d3be4848f92!2sGymshark!5e0!3m2!1ses-419!2sec!4v1733328926649!5m2!1ses-419!2sec" width="400" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
     <!--Footer -->
@@ -416,5 +420,7 @@
         });
 
     </script>
+
+    <script src="../script.js"></script>
 </body>
 </html>

@@ -143,6 +143,26 @@ body.dark-mode .product-card:hover {
     box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
+body.dark-mode .cont-texto {
+    color: #ffffff;
+}
+
+body.dark-mode .vid-title {
+    color: #ffffff;
+}
+
+body.dark-mode .vid-description {
+    color: #ffffff; /* Texto blanco */
+}
+
+body.dark-mode .vid-description p {
+    color: #ffffff; /* El texto dentro del <p> no cambia y se mantiene oscuro */
+}
+
+body.dark-mode .vid-description strong {
+    color: #ffffff; /* Resalta palabras importantes con amarillo */
+}
+
 
 /* Estilos generales del botón de cambio de tema */
 .theme-toggle {
@@ -154,6 +174,7 @@ body.dark-mode .product-card:hover {
     transition: background-color 0.3s, color 0.3s;
     display: inline-flex;
     align-items: center;
+    color: black;
 }
 
 
@@ -279,6 +300,163 @@ body.dark-mode .summary-line.total span {
     color: #fff; /* Color blanco para el total */
 }
 
+/*Cart products*/
+/* Dark Mode para tarjetas de productos */
+body.dark-mode .cat-products {
+    background-color: #333; /* Fondo oscuro general */
+    color: #fff; /* Texto blanco */
+}
+
+body.dark-mode .cat-product-card {
+    background-color: #272727; /* Fondo oscuro para cada tarjeta */
+    color: #fff; /* Texto blanco para títulos y precios */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra suave */
+    padding: 15px; /* Espaciado interno */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark-mode .cat-product-card img {
+    border-radius: 8px; /* Bordes redondeados de las imágenes */
+    max-width: 100%; /* Asegura que la imagen no exceda el tamaño de la tarjeta */
+    margin-bottom: 10px; /* Espaciado debajo de la imagen */
+}
+
+body.dark-mode .cat-product-card h2 {
+    font-size: 1.2rem; /* Tamaño de fuente para el título */
+    margin: 10px 0; /* Espaciado superior e inferior */
+    color: #f0f0f0; /* Título blanco */
+}
+
+body.dark-mode .cat-product-card p {
+    font-size: 1rem; /* Tamaño de fuente para el precio */
+    color: #d3d3d3; /* Color gris claro para el precio */
+    margin: 0; /* Elimina márgenes adicionales */
+}
+
+body.dark-mode .cat-product-card:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Sombra más pronunciada al pasar el mouse */
+}
+
+/*Product Modal*/
+
+/* Modal - Modo oscuro */
+body.dark-mode #modal {
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo semi-transparente oscuro */
+}
+
+/* Contenedor del contenido del modal */
+body.dark-mode #modal-content {
+    background-color: #333; /* Fondo oscuro del contenido */
+    color: #f0f0f0; /* Texto claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1); /* Sombra clara */
+}
+
+/* Imagen principal */
+body.dark-mode #main-img {
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Sombra clara */
+}
+
+body.dark-mode p {
+    color: #d3d3d3;
+}
+
+/* Descripción */
+body.dark-mode #modal-desc {
+    color: #d3d3d3; /* Texto gris claro */
+}
+
+/* Miniaturas */
+body.dark-mode .modal-img-container {
+    scrollbar-color: #555 #333; /* Estilo del scrollbar en navegadores compatibles */
+}
+
+body.dark-mode .modal-img {
+    border-color: transparent; /* Sin borde inicial */
+    transition: border-color 0.3s ease;
+}
+
+body.dark-mode .modal-img:hover {
+    border-color: #fff; /* Resalta miniatura al pasar el mouse */
+}
+
+body.dark-mode .modal-img.active {
+    border-color: #f0f0f0; /* Borde activo en blanco */
+}
+
+/* Opciones (Cantidad, Talla, Botón de compra) */
+body.dark-mode .cantidad label,
+body.dark-mode .talla label {
+    color: #f0f0f0; /* Texto claro */
+}
+
+body.dark-mode .cantidad select {
+    background-color: #444; /* Fondo oscuro del selector */
+    color: #fff; /* Texto claro */
+    border: 1px solid #555; /* Borde oscuro */
+}
+
+body.dark-mode .talla-option {
+    background-color: #444; /* Fondo oscuro */
+    color: #f0f0f0; /* Texto claro */
+    border: 1px solid #555; /* Borde oscuro */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .talla-option:hover {
+    background-color: #555; /* Fondo más claro al pasar el mouse */
+    border-color: #ddd; /* Resalta borde */
+}
+
+body.dark-mode .talla-option.active {
+    background-color: #222; /* Fondo más oscuro */
+    color: #fff; /* Texto blanco */
+    border-color: #f0f0f0; /* Borde claro */
+}
+
+/* Botón de compra */
+body.dark-mode .cat-add-to-cart {
+    background-color: #f0f0f0; /* Fondo claro */
+    color: #333; /* Texto oscuro */
+}
+
+body.dark-mode .cat-add-to-cart:hover {
+    background-color: #ddd; /* Fondo más claro */
+    color: #222; /* Texto más oscuro */
+}
+
+/* Botón de cerrar */
+body.dark-mode .modal-close-btn {
+    color: #fff; /* Botón blanco */
+    background: transparent;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .modal-close-btn:hover {
+    color: #d3d3d3; /* Botón más claro al pasar el mouse */
+}
+
+/* Scroll personalizado en modo oscuro */
+body.dark-mode #modal-content {
+    scrollbar-color: #555 #333; /* Thumb y track del scrollbar */
+}
+
+body.dark-mode #modal-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.dark-mode #modal-content::-webkit-scrollbar-thumb {
+    background-color: #555; /* Color del thumb */
+    border-radius: 10px;
+}
+
+body.dark-mode #modal-content::-webkit-scrollbar-track {
+    background-color: #333; /* Fondo del track */
+}
+
+
 
 /*End Dark Mode*/
 
@@ -310,6 +488,28 @@ body.dark-mode .summary-line.total span {
 
 .header-title h1 {
     margin: 0;  /* Eliminar el margen predeterminado */
+}
+
+.cont-container {
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    text-align: left;
+    padding: 40px;
+    margin: 40px 0; /* Espaciado vertical */
+}
+
+.cont-titulo {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cont-texto {
+    font-size: 1rem;
+    color: #333; /* Color del texto */
+    margin: 0;
 }
 
 
@@ -396,6 +596,8 @@ nav .cart-icon {
     height: 25em; /* Altura fija para la franja (30% de la pantalla) */
     overflow: hidden; /* Recorta el contenido que exceda la altura */
     margin-bottom: 10px;
+    margin: 0;
+    z-index: 1; /* Asegura que esté detrás del nav */
 }
 
 .video-fullscreen video {
@@ -420,11 +622,43 @@ nav .cart-icon {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra para mejor visibilidad */
     text-align: center;
     letter-spacing: 0.05em;
+    z-index: 2; /* Asegura que esté sobre el video */
 }
 
 .overlay-text span {
     color: #ffffff; /* Color destacado para "ATHLEX" */
 }
+
+@media (max-width: 768px) {
+
+    .video-fullscreen video {
+        width: auto; /* Asegura que el video mantenga sus proporciones */
+        height: 100%; /* Rellena verticalmente el contenedor */
+        transform: translate(-50%, -50%); /* Mantén el video centrado */
+    }
+
+    /* Ajustar el texto del overlay */
+    .overlay-text {
+        font-size: 1.5em; /* Reducir tamaño del texto en pantallas pequeñas */
+        padding: 0 15px; /* Agregar algo de padding para evitar bordes pegados */
+    }
+
+    .overlay-text span {
+        font-size: 1.7em; /* Escala adecuada para el texto destacado */
+    }
+}
+
+@media (max-width: 480px) {
+
+    .overlay-text {
+        font-size: 1.2em; /* Tamaño más pequeño para el texto */
+    }
+
+    .overlay-text span {
+        font-size: 1.4em; /* Ajustar tamaño del texto destacado */
+    }
+}
+
 
 
 /*cart-off-canvas*/
@@ -867,11 +1101,6 @@ section {
 
 /*------------------------*/
 
-h3 {
-    font-size: 1.2rem;
-    margin: 10px 0;
-}
-
 p {
     font-size: 1rem;
     color: #333;
@@ -946,6 +1175,8 @@ p {
   
 
 .banner-content {
+    font-family: 'Poppins', sans-serif;
+    word-spacing: 0.05;
     text-align: left;
     background: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente para el texto */
     padding: 2em;
@@ -991,6 +1222,78 @@ p {
       padding: 10px;
     }
   }
+
+
+/*Index Banner*/
+.ind-banner {
+    position: relative;
+    height: 500px; /* Ocupa el 100% de la pantalla */
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  .ind-banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra todo el área sin distorsión */
+    z-index: -1; /* Envía la imagen al fondo */
+  }
+  
+
+.ind-banner-content {
+    text-align: left;
+    background: transparent; /* Fondo semi-transparente para el texto */
+    padding: 2em;
+    width: 30%; /* Puedes ajustar este porcentaje si necesitas que ocupe más o menos espacio */
+    border-radius: 0;
+  }
+  
+  .ind-banner h2 {
+    font-size: 3em;
+    margin-bottom: 1em;
+  }
+  
+  .ind-banner p {
+    font-size: 0.9em;
+  }
+
+  /* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .ind-banner h2 {
+      font-size: 36px;
+    }
+  
+    .ind-banner p {
+      font-size: 16px;
+    }
+  
+    .ind-banner-content {
+      width: 80%; /* Ajusta el ancho del contenido para pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .ind-banner h2 {
+      font-size: 24px;
+    }
+  
+    .ind-banner p {
+      font-size: 14px;
+    }
+  
+    .ind-banner-content {
+      width: 90%; /* Más espacio para texto en pantallas pequeñas */
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+
+
 
 
 /*Contact Page*/ /*----------------------------------------*/
@@ -1206,6 +1509,7 @@ p {
     color: #333;
     padding: 40px 20px;
     font-family: Arial, sans-serif;
+    border-top: 1px solid #bebebe; /* Añade una línea fina al inicio */
 }
 
 .footer-container {
@@ -1754,6 +2058,103 @@ p {
 
 
 
+/*Content cards*/
+/* Container for all cards */
+.cont-card-container {
+    display: flex;
+    padding: 30px;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Wrap items on smaller screens */
+    justify-content: center; /* Center all cards */
+  }
+  
+  /* Individual card styles */
+  .cont-card {
+    position: relative;
+    flex: 1 1 calc(33.333% - 20px); /* Each card takes up 1/3 of the row */
+    margin-bottom: 20px;
+    overflow: hidden;
+    cursor: pointer; /* Pointer to indicate interactivity */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  }
+  
+  /* Image styles */
+  .cont-card-image {
+    width: 100%;
+    height: 25em; /* Fixed height for all cards */
+    object-fit: cover; /* Ensure the image fills the container */
+    object-position: center;
+    display: block;
+    transition: transform 4s ease; /* Smooth hover motion */
+  }
+  
+  /* Image hover effect */
+  .cont-card:hover .cont-card-image {
+    transform: scale(1.1); /* Slight zoom on hover */
+  }
+  
+  /* Overlay for button */
+  .overlay {
+    position: absolute;
+    bottom: 20px; /* Move the button to the bottom */
+ 
+    
+    display: flex;
+    justify-content: center; /* Center button horizontally */
+    z-index: 1; /* Ensure the button is above the image */
+    pointer-events: none; /* Prevent hover issues on overlay */
+  }
+  
+  /* Button styles */
+  .overlay-button {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease-in-out; /* Smooth button hover effect */
+    pointer-events: auto; /* Allow the button to be clickable */
+  }
+  
+  /* Button hover effect */
+  .overlay-button:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Darker black on hover */
+  }
+  
+  
+  /* Media queries for smaller screens */
+  @media (max-width: 1024px) {
+    .cont-card {
+      flex: 1 1 calc(50% - 20px); /* Each card takes up half the row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cont-card-container {
+      gap: 10px; /* Reduce spacing between cards */
+    }
+  
+    .cont-card {
+      flex: 1 1 calc(100% - 10px); /* Each card takes up the full row */
+    }
+  
+    .overlay {
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+    }
+  
+    .overlay-button {
+      font-size: 0.9rem; /* Slightly smaller button text */
+    }
+  }
+  
+
 
 
 
@@ -1764,7 +2165,6 @@ p {
     align-items: flex-start; /* Alinea al inicio de la pantalla */
     height: 100%;
     width: 100%;
-    background: linear-gradient(135deg, #ececec, #ffffff);
     font-family: 'Arial', sans-serif;
     padding-top: 20px; /* Margen superior */
     padding-bottom: 20px;
@@ -1783,6 +2183,46 @@ p {
     animation: fadeIn 1s ease-in-out;
     margin-top: 20px; /* Espaciado adicional opcional */
     margin-bottom: 20px; /* Espaciado adicional opcional */
+}
+
+.session-container {
+    text-align: center;
+    margin: 20px;
+}
+
+.user-icon {
+    font-size: 100px; /* Tamaño del ícono */
+    color: #000000; /* Color del ícono */
+    margin-bottom: 20px;
+}
+
+
+.logout-button {
+    background: linear-gradient(to right, #ff3737 50%, #ffffff 50%);
+    background-size: 200% 100%;
+    color: #ffffff; /* Color inicial del texto */
+    font-weight: bold;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-position 0.4s ease-in-out, color 0.4s ease-in-out, transform 0.2s;
+    width: 100%; /* Coincide con el ancho de los inputs */
+    box-sizing: border-box; /* Consistencia de tamaño */
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5); /* Asegura que el texto sea legible */
+    margin-top: 10px;
+}
+
+.logout-button:hover {
+    background-position: -100% 0; /* Efecto de desplazamiento */
+    color: #ff0000; /* Cambia el color del texto */
+    transform: scale(1.05); /* Efecto de aumento */
+}
+.logout-button:active {
+    transform: scale(0.98); /* Pequeña contracción */
+    background-color: #ff3737; /* Color fijo para el clic */
+    color: #ffffff;
 }
 
 /* Logo Styles */
@@ -1825,6 +2265,25 @@ p {
 .form-group {
     position: relative;
     margin-bottom: 10px;
+}
+
+.password-container {
+    position: relative;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+#togglePassword2 {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 input[type="email"], 
@@ -1951,7 +2410,7 @@ textarea:focus {
 @media (max-width: 480px) {
     .login-container {
         padding: 20px;
-        width: 95%;
+        width: 90%;
     }
 
     .Sign-h1 {
@@ -1970,6 +2429,11 @@ textarea:focus {
     }
 
     .login-button {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    .logout-button {
         font-size: 0.9rem;
         padding: 12px;
     }
@@ -2195,4 +2659,206 @@ textarea:focus {
 
 .pay-discount-code button:hover {
     background: #333;
+}
+
+
+/*Video*/
+
+.vid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+}
+
+.vid-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.vid-selector {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.vid-btn {
+    padding: 10px 20px;
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    border: none; /* Sin bordes */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor a "puntero" */
+    font-size: 1rem; /* Tamaño de fuente */
+    font-weight: 600; /* Fuente ligeramente más gruesa */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 0.05em; /* Espaciado entre letras */
+    transition: all 0.3s ease; /* Transición para suavizar cambios */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+.vid-btn:hover {
+    background-color: #444; /* Color más claro al pasar el ratón */
+    color: #ffffff; /* Cambia el texto a blanco */
+    transform: translateY(-2px); /* Efecto de levantamiento */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5); /* Sombra más profunda */
+}
+
+.vid-btn-selected {
+    background-color: #444; /* Color más claro para el botón seleccionado */
+    color: #ffffff; /* Mantén el texto blanco */
+    transform: translateY(-2px); /* Efecto visual similar al hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5); /* Sombra más profunda */
+    cursor: default; /* Cambia el cursor para indicar que está activo */
+}
+
+
+.vid-player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vid-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.vid-player__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: black;
+}
+
+/* Estilo para videos verticales */
+.vid-wrapper.vertical {
+    max-width: 400px; /* Reduce el tamaño máximo para videos verticales */
+    width: 60%; /* Tamaño más pequeño relativo a la pantalla */
+}
+
+
+.vid-controls {
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* Evita que interfiera con clics cuando está oculto */
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Los controles se alinean entre los extremos */
+    align-items: center;
+    padding: 0 10px; /* Espaciado lateral */
+}
+
+/* Mostrar controles cuando se hace hover en el video */
+.vid-wrapper:hover .vid-controls {
+    opacity: 1; /* Hacer visibles los controles */
+    pointer-events: auto; /* Permite la interacción */
+}
+
+/* Animación de desaparición */
+.vid-controls.hide-controls {
+    opacity: 0; /* Desaparecer con transición */
+    pointer-events: none; /* Bloquear interacción mientras está oculto */
+}
+
+.vid-controls-left {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones de la izquierda */
+}
+
+.vid-control-btn {
+    color: white;
+    border: none;
+    background: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.vid-control-btn:hover {
+    transform: scale(1.2);
+    color: #000; /* Cambia el color al pasar el ratón */
+}
+
+/* Botón de pantalla completa */
+.vid-control-fs {
+    margin-right: 15px; /* Empuja el botón a la derecha */
+}
+
+
+.vid-description {
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.vid-description p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+.vid-description strong {
+    color: #000000; /* Resalta palabras importantes con color */
+    font-weight: 600;
+}
+
+/* Media query para pantallas medianas */
+@media (max-width: 768px) {
+    .vid-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .vid-title {
+        font-size: 20px;
+    }
+
+    .vid-wrapper {
+        width: 80%; /* El video ocupa el 80% del ancho de la pantalla */
+        max-width: 600px; /* Limita el tamaño máximo */
+    }
+
+    .vid-wrapper.vertical {
+        width: 70%; /* Aumenta el tamaño de videos verticales */
+        max-width: 450px; /* Mayor límite para pantallas medianas */
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .vid-btn {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
+    .vid-title {
+        font-size: 18px;
+    }
+
+    .vid-wrapper {
+        width: 95%; /* El video ocupa casi todo el ancho de la pantalla */
+        max-width: 400px; /* Límite general para videos */
+    }
+
+    .vid-wrapper.vertical {
+        width: 90%; /* Los videos verticales ocupan casi todo el ancho */
+        max-width: 480px; /* Tamaño máximo para videos verticales */
+    }
 }

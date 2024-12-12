@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
 </head>
-<body>
+<body style="background: linear-gradient(135deg, #ececec, #ffffff);">
     <div>
         <nav>
             <button class="hamburger-menu" onclick="toggleMenu()">
@@ -32,9 +32,6 @@
                     </button>
                 </a>
             </div>
-            <button class="cart-icon" onclick="toggleCart()">
-                <i class="fa fa-shopping-cart"></i>
-            </button>
         </nav>
             <script>
                 function toggleMenu() {
@@ -88,43 +85,39 @@
         </div>
     </div>
     <div class="log-main-container">
-        <div class="login-container">
+        <div class="login-container" id="loginSection">
             <img src="../Images/logo1-nb.png" alt="Logo" class="logo">
             <h1 class="Sign-h1">INICIA SESIÓN EN ATHLEX</h1>
             <p class="Sign-p">Compra tus estilos, guarda tus favoritos, sigue tus pedidos y entrena con nosotros.</p>
-            <form id = "myForm" action="#" method="post" class="login-form">
+            <form id="loginForm" action="" method="post" class="login-form">
                 <div class="form-group">
                     <input type="email" id="email" name="email" placeholder="Correo electrónico*" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group password-container">
                     <input type="password" id="password" name="password" placeholder="Contraseña*" required>
-                    
+                    <i id="togglePassword" class="fas fa-eye"></i>
                 </div>
-                
                 <button type="submit" class="login-button">ACCESO</button>
             </form>
-    
-            <script src="app.js"></script>
-    
             <p class="signup-text">¿No tiene una cuenta? <a href="signUp.html">Inscribirte</a></p>
         </div>
+    
+        <!-- Contenedor para la sesión iniciada -->
+        <div class="session-container" id="sessionSection" style="display: none;">
+            <div class="login-container">
+                <i class="fas fa-user-circle user-icon"></i>
+                <h1 class="Sign-h1">Bienvenido</h1>
+                <p class="Sign-p" id="userEmail">Estás iniciado sesión como: <strong></strong></p>
+                <a href="catalogo/catalogo.html">
+                    <button class="login-button">Seguir Comprando</button>
+                </a>
+                <button id="logoutButton" class="logout-button">Cerrar sesión</button>
+            </div>
+        </div>
+        <script src="login.js"></script>
     </div>
-    <script>
-        function togglePassword() {
-            const passwordField = document.getElementById("password");
-            const toggleIcon = document.querySelector(".toggle-password");
+    
 
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                toggleIcon.classList.remove("fa-eye");
-                toggleIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordField.type = "password";
-                toggleIcon.classList.remove("fa-eye-slash");
-                toggleIcon.classList.add("fa-eye");
-            }
-        }
-    </script>
 
 <script>
     let productoActual = '';

@@ -35,11 +35,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para obtener la ruta correcta del logo según el modo
     function getLogoPath(mode) {
-        const currentPath = window.location.pathname.split('/').slice(0, -1).join('/'); // Obtener la ruta actual
+        const basePath = window.location.origin; // Obtiene la URL base (http://localhost:3006 o tu dominio)
         if (mode === 'white') {
-            return `${currentPath}/Images/logo1-nb-white.png`; // Ruta al logo blanco para modo oscuro
+            return `${basePath}/Images/logo1-nb-white.png`; // Ruta al logo blanco para modo oscuro
         } else {
-            return `${currentPath}/Images/logo1-nb.png`; // Ruta al logo original para modo claro
+            return `${basePath}/Images/logo1-nb.png`; // Ruta al logo original para modo claro
         }
     }
+
 });
+
+/* Verificar si se inició sesión para redirigir */
+document.getElementById('checkoutButton').addEventListener('click', function () {
+    const loggedInUser = localStorage.getItem('loggedInUser'); // Verificar si hay sesión iniciada
+
+    // Construir rutas absolutas basadas en la ubicación actual
+    const basePath = window.location.origin;
+    const finalPaymentPath = `${basePath}/pages/catalogo/finalpayment.html`;
+    const signInPath = `${basePath}/signIn.html`;
+
+    if (loggedInUser) {
+        // Si la sesión está iniciada, redirigir a la página de pago
+        window.location.href = finalPaymentPath;
+    } else {
+        // Si no hay sesión iniciada, redirigir a iniciar sesión
+        alert('Debes iniciar sesión antes de proceder al pago.');
+        window.location.href = signInPath;
+    }
+});
+
