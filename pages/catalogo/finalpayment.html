@@ -22,7 +22,9 @@
             <a href="../signIn.html">Iniciar sesion</a>
         </div>
         <div class="nav-links" id="menu">
-            <a href="../../index.html">Inicio</a>
+            <a href="../../index.html">
+                <button class="nav-b-button">Inicio</button>
+            </a>
             <a href="gymshark.html">Gymshark</a>
             <a href="youngla.html">Youngla</a>
             <a href="controlled.html">Controlled Insanity</a>
@@ -55,33 +57,40 @@
         <div class="pay-payment-method">
             <label class="pay-label">
                 <span>
-                    <input type="radio" name="payment-method" value="card" checked onchange="togglePaymentMethod('card')">
-                    Tarjeta de Credito/Debito
+                    <input type="radio" name="payment-method" value="card" onchange="togglePaymentMethod('card')">
+                    Tarjeta de Crédito/Débito
                 </span>
-                <span>
-                    <img src="../../Images/Payment metods/visa-card.svg" alt="Visa">
-                    <img src="../../Images/Payment metods/mastercard-card.svg" alt="MasterCard">
-                    <img src="../../Images/Payment metods/amex-card.svg" alt="American Express">
+                <span class="pay-card-logos">
+                    <!-- Solo tarjetas específicas -->
+                    <img src="../../Images/Payment methods/visa-card.svg" alt="Visa" title="Visa">
+                    <img src="../../Images/Payment methods/mastercard-card.svg" alt="MasterCard" title="MasterCard">
+                    <img src="../../Images/Payment methods/amex-card.svg" alt="American Express">
                 </span>
             </label>
-            
-            
+        
             <div id="card-details" class="pay-card-details">
-                <input type="text" placeholder="Card number">
-                <input type="text" placeholder="Expiration date (MM / YY)">
-                <input type="text" placeholder="Security code">
-                <input type="text" placeholder="Name on card">
+                <input type="text" placeholder="Card number" class="pay-input" maxlength="16">
+                <div class="pay-expiry-cvc">
+                    <input type="text" placeholder="Expiration date (MM / YY)" class="pay-input" maxlength="7">
+                    <input type="text" placeholder="Security code" class="pay-input" maxlength="4">
+                </div>
+                <input type="text" placeholder="Name on card" class="pay-input">
+        
+                <label class="pay-checkbox">
+                    <input type="checkbox" checked>
+                    Usar la dirección de envío como dirección de facturación
+                </label>
             </div>
         </div>
-    
+
         <div class="pay-payment-method">
             <label class="pay-label">
                 <span>
-                    <input type="radio" name="payment-method" value="paypal" checked onchange="togglePaymentMethod('paypal')">
+                    <input type="radio" name="payment-method" value="paypal" onchange="togglePaymentMethod('paypal')">
                     PayPal
                 </span>
                 <span>
-                    <img src="../../Images/Payment metods/paypal-card.svg" alt="PayPal">
+                    <img src="../../Images/Payment methods/paypal-card.svg" alt="PayPal">
                 </span>
             </label>
             <div id="paypal-details" class="pay-paypal-details hidden">
@@ -90,7 +99,8 @@
         </div>
     
         <!-- Botón de pago -->
-        <button id="pay-button" class="pay-pay-now-btn">PAGAR</button>
+        <button id="pay-button" class="pay-pay-now-btn">Pagar ahora</button>
+  
     </section>
 
     <!-- Resumen del carrito -->
@@ -119,8 +129,8 @@
 
         <!-- Código de descuento -->
         <div class="pay-discount-code">
-            <input type="text" placeholder="Discount Code">
-            <button type="button">Apply Code</button>
+            <input type="text" placeholder="Codigo de descuento">
+            <button type="button" class="pay-pay-now-btn">Apply Code</button>
         </div>
     </aside>
 </div>
@@ -180,7 +190,7 @@
         } else if (method === 'paypal') {
             cardDetails.classList.add('hidden');
             paypalDetails.classList.remove('hidden');
-            payButton.textContent = 'Pagar co  PayPal';
+            payButton.textContent = 'Pagar con PayPal';
         }
     }
 

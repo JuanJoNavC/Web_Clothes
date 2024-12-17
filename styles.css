@@ -456,7 +456,18 @@ body.dark-mode #modal-content::-webkit-scrollbar-track {
     background-color: #333; /* Fondo del track */
 }
 
+body.dark-mode .nav-b-button {
+    color: #ffffff; /* Fondo del track */
+}
 
+body.dark-mode .nav-b-button:focus,
+body.dark-mode .nav-b-button:hover {
+    color: #ffffff;
+}
+
+body.dark-mode .nav-b-button:after {
+    background-color: #ffffff;
+  }
 
 /*End Dark Mode*/
 
@@ -525,6 +536,48 @@ nav {
     top: 0;
     z-index: 1000;
 }
+
+/* From Uiverse.io by WhiteNervosa */ 
+.nav-b-button {
+    font-size: 18px;
+    color: #000000;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+  }
+  
+  .nav-b-button:focus,
+  .nav-b-button:hover {
+    color: #000000;
+  }
+  
+  .nav-b-button:focus:after,
+  .nav-b-button:hover:after {
+    width: 100%;
+    left: 0%;
+  }
+  
+  .nav-b-button:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #000000;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
+  }
+  
 
 nav img.nav-logo {
     height: 30px;
@@ -993,7 +1046,7 @@ a {
     max-width: 100%;
     margin: auto;
     background-color: #000000;
-    color: #eaeaee;
+    color: #eaeaee; 
 }
 
 .left {
@@ -2504,40 +2557,54 @@ textarea:focus {
 }
 
 .pay-payment-method {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
+    border: 1px solid #ccc;
     border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    width: auto;
+    font-family: Arial, sans-serif;
 }
 
-
-
-.pay-card-details input {
-    margin: 5px 5px 15px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box; /* Asegura que padding y borde se incluyan en el ancho */
+.pay-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.pay-card-details input:first-child, 
-.pay-card-details input:last-child {
+.pay-card-logos img {
+    height: 24px;
+    margin: 0 5px;
+}
+
+.pay-card-details {
+    margin-top: 15px;
+}
+
+.pay-input {
     width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.pay-card-details input:nth-child(2),
-.pay-card-details input:nth-child(3) {
-    width: calc(50% - 10px);
+.pay-expiry-cvc {
+    display: flex;
+    gap: 10px;
 }
 
-.pay-paypal-details.hidden {
-    display: none;
+.pay-expiry-cvc .pay-input {
+    flex: 1;
 }
 
-.pay-paypal-details {
+.pay-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-top: 10px;
-    font-size: 14px;
-    color: #555;
 }
 
 .pay-pay-now-btn {
@@ -2647,18 +2714,8 @@ textarea:focus {
 }
 
 .pay-discount-code button {
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px;
-    background: black;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.pay-discount-code button:hover {
-    background: #333;
 }
 
 

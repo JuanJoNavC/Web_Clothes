@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 
 // Configuración de la base de datos
 const dbConfig = {
-    host: 'localhost',
+    host: '192.168.56.1',
     user: 'admin', // Usuario creado anteriormente
     password: 'admin', // Contraseña
     database: 'SportShop'
