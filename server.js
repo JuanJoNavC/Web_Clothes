@@ -23,10 +23,11 @@ app.get('/', (req, res) => {
 
 // Configuración de la base de datos
 const dbConfig = {
-    host: '192.168.56.1',
+    host: 'junction.proxy.rlwy.net',
     user: 'admin', // Usuario creado anteriormente
     password: 'admin', // Contraseña
-    database: 'SportShop'
+    database: 'railway',
+    port: 11604
 };
 
 // Endpoint para manejar solicitudes POST
