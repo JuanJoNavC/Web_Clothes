@@ -32,7 +32,7 @@ const dbConfig = {
     database: 'defaultdb',
     port: 27073,
     ssl: {
-        ca: fs.readFileSync(caCertificatePath), // Lee el certificado desde el archivo
+        ca: fs.readFileSync(process.env.caCertificatePath), // Lee el certificado desde el archivo
     },
 };
 
