@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
 </head>
-<body style="background: linear-gradient(135deg, #ececec, #ffffff);">
+<body>
     <div>
         <nav>
             <button class="hamburger-menu" onclick="toggleMenu()">
@@ -23,9 +23,15 @@
                 <a href="#">Iniciar sesion</a>
             </div>
             <div class="nav-links" id="menu">
-                <a href="../index.html">Inicio</a>
-                <a href="../pages/catalogo/catalogo.html">Catálogo</a>
-                <a href="../pages/contact.html">Contactanos</a>
+                <a href="../index.html">
+                    <button class="nav-b-button">Inicio</button>
+                </a>
+                <a href="../pages/catalogo/catalogo.html">
+                    <button class="nav-b-button">Catálogo</button>
+                </a>
+                <a href="../pages/contact.html">
+                    <button class="nav-b-button">Contactanos</button>
+                </a>
                 <a href="signIn.html">
                     <button class="boton-iniciar">
                         <i class="fa-solid fa-user"></i>
@@ -90,13 +96,17 @@
             <h1 class="Sign-h1">INICIA SESIÓN EN ATHLEX</h1>
             <p class="Sign-p">Compra tus estilos, guarda tus favoritos, sigue tus pedidos y entrena con nosotros.</p>
             <form id="loginForm" action="" method="post" class="login-form">
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Correo electrónico*" required>
+                <div class="form-group input-container">
+                    <input type="email" id="email" name="email" placeholder="Correo electrónico*" class="input-field" required autocomplete="email">
+                    <label class="input-label" for="email">Correo electrónico</label>
                 </div>
-                <div class="form-group password-container">
-                    <input type="password" id="password" name="password" placeholder="Contraseña*" required>
+                
+                <div class="form-group input-container password-container">
+                    <input type="password" id="password" name="password" placeholder="Contraseña*" class="input-field" required>
+                    <label class="input-label" for="password">Contraseña</label>
                     <i id="togglePassword" class="fas fa-eye"></i>
                 </div>
+                
                 <button type="submit" class="login-button">ACCESO</button>
             </form>
             <p class="signup-text">¿No tiene una cuenta? <a href="signUp.html">Inscribirte</a></p>

@@ -539,10 +539,9 @@ nav {
 
 /* From Uiverse.io by WhiteNervosa */ 
 .nav-b-button {
-    font-size: 18px;
+    font-size: 16px;
     color: #000000;
     font-family: inherit;
-    font-weight: 800;
     cursor: pointer;
     position: relative;
     border: none;
@@ -572,7 +571,7 @@ nav {
     position: absolute;
     width: 0%;
     height: 2px;
-    background-color: #000000;
+    background-color: #424242;
     transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
     transition-duration: 400ms;
     transition-property: width, left;
@@ -2296,7 +2295,7 @@ p {
 .Sign-p {
     font-size: 1rem;
     color: #333333;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
 }
 
 /* Form Styles */
@@ -2318,6 +2317,88 @@ p {
 .form-group {
     position: relative;
     margin-bottom: 10px;
+}
+
+/* Adapted CSS */
+.input-container {
+    --c-text: rgb(50, 50, 80);
+    --c-bg: rgb(252, 252, 252);
+    --c-outline: rgb(55, 45, 190);
+    display: grid;
+    gap: 1em; /* Espaciado entre elementos internos */
+    position: relative;
+    width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    margin-bottom: 1.5em; /* Espaciado entre cada input-container */
+}
+
+.input-field {
+    padding: 0.75em 1em; /* Ajuste para un diseño más espacioso */
+    border-radius: 0.3em;
+    border: 1px solid var(--c-border, currentColor);
+    color: var(--c-text);
+    font-size: 1rem;
+    letter-spacing: 0.1ch;
+    width: 100%; /* Se ajusta al ancho del contenedor */
+    box-sizing: border-box; /* Asegura que padding y border no superen el ancho */
+    appearance: none; /* Evita estilos nativos del navegador en select */
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    transition: border-color 0.3s ease-in-out; /* Transición de borde */
+}
+
+/* Transición de la etiqueta al ser enfocado o seleccionado */
+.input-field:not(:placeholder-shown) + .input-label,
+.input-field:focus + .input-label,
+.input-field:valid + .input-label {
+    transform: translateY(-220%);
+    opacity: 1;
+}
+
+.input-field:invalid {
+    --c-border: rgb(230, 85, 60);
+    --c-text: rgb(230, 85, 60);
+    --c-outline: rgb(230, 85, 60);
+}
+
+.input-field:is(:disabled, :read-only) {
+    --c-border: rgb(150, 150, 150);
+    --c-text: rgb(170, 170, 170);
+}
+
+.input-field:is(:focus, :focus-visible) {
+    outline: 2px solid var(--c-outline);
+    outline-offset: 2px;
+}
+
+.input-label {
+    --timing: 200ms ease-in;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transition: transform var(--timing), opacity var(--timing);
+    transform: translateY(-50%);
+    opacity: 0;
+    color: var(--c-text);
+    font-weight: 500;
+}
+
+/* Asegura que el select se vea similar a los inputs */
+.select-field {
+    appearance: none; /* Elimina la flecha predeterminada del select */
+    color: #000;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    padding-right: 30px; /* Para dejar espacio a la flecha */
+}
+
+/* Transición adicional para los select */
+.select-field:focus + .input-label,
+.select-field:not(:placeholder-shown) + .input-label {
+    transform: translateY(-220%);
+    opacity: 1;
 }
 
 .password-container {
