@@ -25,9 +25,15 @@
             <a href="../../index.html">
                 <button class="nav-b-button">Inicio</button>
             </a>
-            <a href="gymshark.html">Gymshark</a>
-            <a href="youngla.html">Youngla</a>
-            <a href="controlled.html">Controlled Insanity</a>
+            <a href="gymshark.html">
+                <button class="nav-b-button">Gymshark</button>
+            </a>
+            <a href="youngla.html">
+                <button class="nav-b-button">Youngla</button>
+            </a>
+            <a href="controlled.html">
+                <button class="nav-b-button">Controlled Insanity</button>
+            </a>
             <a href="../signIn.html">
                 <button class="boton-iniciar">
                     <i class="fa-solid fa-user"></i>
@@ -48,11 +54,86 @@
 
 <!-- Contenedor de la página de pago -->
 <div class="pay-container">
-    <!-- Formulario de pago -->
+    <!-- Formulario de pago -->    
     <section class="pay-payment-form">
         <h2>Pago de productos</h2>
         <p>Todas nuestras transferencias son seguras</p>
-    
+        
+        <!-- Cuenta (Correo)-->
+        <div class="account-info" id="accountInfo">
+            <div class="account-header">
+                <h3>Cuenta<h3>
+                <button class="dropdown-toggle" onclick="toggleDropdown()">&#9662;</button>
+            </div>
+            <span id="loggedEmail" class="account-email"></span>
+            <div class="dropdown-menu hidden" id="dropdownMenu">
+                <button id="logoutButton" class="logout-checkout-button">Cerrar sesión</button>
+            </div>
+        </div>
+        
+        <!-- Direccion de envio -->
+        <div class="delivery-form">
+            <h2>Dirección de envio</h2>
+        
+            <div class="delivery-group">
+                <label for="country">País / Región</label>
+                <div class="delivery-select-wrapper">
+                    <select id="country" class="delivery-select">
+                        <option value="">Seleccione un país</option>
+                    </select>
+                    <i class="fas fa-chevron-down delivery-arrow"></i>
+                </div>
+            </div>
+        
+            <div class="delivery-group-row">
+                <div class="delivery-group">
+                    <label for="firstName">
+                        Nombre 
+                        <i class="fa fa-question-circle info-icon" title="Tooltip"></i>
+                        <span class="tooltip">Si su apellido es especificado en este campo, por favor ponerlo en el campo de apellido</span>
+                    </label>
+                    <input type="text" id="firstName" class="delivery-input" placeholder="(opcional)">
+                </div>
+                <div class="delivery-group">
+                    <label for="lastName">Apellido</label>
+                    <input type="text" id="lastName" class="delivery-input" placeholder="(opcional)">
+                </div>
+            </div>
+        
+            <div class="delivery-group">
+                <label for="address">Direccion</label>
+                <input type="text" id="address" class="delivery-input">
+            </div>
+        
+            <div class="delivery-group">
+                <label for="apartment">Departemento, Casa etc.</label>
+                <input type="text" id="apartment" class="delivery-input" placeholder="(opcional)">
+            </div>
+        
+            <div class="delivery-group-row">
+                <div class="delivery-group">
+                    <label for="postalCode">Codigo postal</label>
+                    <input type="text" id="postalCode" class="delivery-input">
+                </div>
+                <div class="delivery-group">
+                    <label for="city">Ciudad</label>
+                    <div class="delivery-select-wrapper">
+                        <select id="city" class="delivery-select">
+                            <option value="">Seleccione una ciudad</option>
+                        </select>
+                        <i class="fas fa-chevron-down delivery-arrow"></i>
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="delivery-group">
+                <label for="phone">Telefono</label>
+                <input type="text" id="phone" class="delivery-input">
+            </div>
+        </div>
+        
+
         <!-- Opciones de método de pago -->
         <div class="pay-payment-method">
             <label class="pay-label">
@@ -62,22 +143,24 @@
                 </span>
                 <span class="pay-card-logos">
                     <!-- Solo tarjetas específicas -->
-                    <img src="../../Images/Payment methods/visa-card.svg" alt="Visa" title="Visa">
-                    <img src="../../Images/Payment methods/mastercard-card.svg" alt="MasterCard" title="MasterCard">
-                    <img src="../../Images/Payment methods/amex-card.svg" alt="American Express">
+                    <img src="../../Images/Payment methods/visa-card.svg" alt="Visa" title="Visa" id="visa-logo">
+                    <img src="../../Images/Payment methods/mastercard-card.svg" alt="MasterCard" title="MasterCard" id="mastercard-logo">
+                    <img src="../../Images/Payment methods/amex-card.svg" alt="American Express" id="amex-logo">
                 </span>
             </label>
         
             <div id="card-details" class="pay-card-details">
-                <input type="text" placeholder="Card number" class="pay-input" maxlength="16">
+                <input type="text" placeholder="Numero de Tarjeta" class="pay-input" id="card-number">
                 <div class="pay-expiry-cvc">
-                    <input type="text" placeholder="Expiration date (MM / YY)" class="pay-input" maxlength="7">
-                    <input type="text" placeholder="Security code" class="pay-input" maxlength="4">
+                    <input type="text" placeholder="Fecha de expiracion (MM / YY)" class="pay-input" id="expiry-date" maxlength="5">
+                    <input type="text" placeholder="Codigo de Seguridad" class="pay-input" id="cvc-code" maxlength="4">
                 </div>
-                <input type="text" placeholder="Name on card" class="pay-input">
-        
+                <input type="text" placeholder="Nombre en la tarjeta" class="pay-input">
                 <label class="pay-checkbox">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" class="styled-checkbox" checked disabled>
+                    <span class="checkbox-custom">
+                        <i class="fas fa-check"></i>
+                    </span>
                     Usar la dirección de envío como dirección de facturación
                 </label>
             </div>
@@ -121,6 +204,17 @@
             <p>IVA (15%)</p>
             <span id="pay-iva">$0.00</span>
         </div>
+
+        <!-- Contenedor del descuento aplicado -->
+        <div class="pay-summary-line" id="applied-discount" style="display: none;">
+            <p>Código aplicado</p>
+            <span id="discount-code">Sin codigo de descuento</span>
+        </div>
+        
+        <div class="pay-summary-line" id="applied-discount-percentage" style="display: none;">
+            <p>Descuento</p>
+            <span id="discount-percentage">0<span>%
+        </div>
         
         <div class="pay-summary-line total">
             <p>Total</p>
@@ -130,71 +224,15 @@
         <!-- Código de descuento -->
         <div class="pay-discount-code">
             <input type="text" placeholder="Codigo de descuento">
-            <button type="button" class="pay-pay-now-btn">Apply Code</button>
+            <button type="button" class="pay-pay-now-btn">Aplicar Codigo</button>
         </div>
+
+        
     </aside>
 </div>
 
-<script>
-    // Cargar productos del carrito
-    document.addEventListener("DOMContentLoaded", function () {
-        const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
-        const cartItemsContainer = document.getElementById("pay-cart-items");
-        const subtotalElement = document.getElementById("pay-subtotal");
-        const shippingElement = document.getElementById("pay-shipping");
-        const ivaElement = document.getElementById("pay-iva");
-        const totalElement = document.getElementById("pay-total");
+<script src="../../javascript/discount_code"></script>
+<script src="../login.js"></script>
 
-        let subtotal = 0;
-        const envioFijo = 5; // Tarifa fija de envío
-        const envioGratisLimite = 100; // Límite para envío gratuito
-        const ivaPorcentaje = 0.15; // IVA 15%
-
-        cartItems.forEach(product => {
-            subtotal += product.precio * product.cantidad;
-
-            const item = document.createElement("div");
-            item.classList.add("pay-cart-item");
-            item.innerHTML = `
-                <img src="${product.imagen}" alt="${product.nombre}">
-                <div class="pay-cart-item-details">
-                    <p><strong>${product.nombre}</strong></p>
-                    <p class="pay-cart-item-size">Talla: ${product.talla || "N/A"}</p>
-                </div>
-                <p class="pay-cart-item-price">$${(product.precio * product.cantidad).toFixed(2)}</p>
-            `;
-            cartItemsContainer.appendChild(item);
-        });
-
-        // Calcular IVA y envío
-        const iva = subtotal * ivaPorcentaje;
-        const envio = subtotal >= envioGratisLimite ? 0 : envioFijo;
-        const total = subtotal + iva + envio;
-
-        // Actualizar los elementos del DOM
-        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-        ivaElement.textContent = `$${iva.toFixed(2)}`;
-        shippingElement.textContent = `$${envio.toFixed(2)}`;
-        totalElement.textContent = `$${total.toFixed(2)}`;
-    });
-    
-    function togglePaymentMethod(method) {
-        const cardDetails = document.getElementById('card-details');
-        const paypalDetails = document.getElementById('paypal-details');
-        const payButton = document.getElementById('pay-button');
-
-        if (method === 'card') {
-            cardDetails.classList.remove('hidden');
-            paypalDetails.classList.add('hidden');
-            payButton.textContent = 'Pagar ahora';
-        } else if (method === 'paypal') {
-            cardDetails.classList.add('hidden');
-            paypalDetails.classList.remove('hidden');
-            payButton.textContent = 'Pagar con PayPal';
-        }
-    }
-
-
-</script>
 </body>
 </html>

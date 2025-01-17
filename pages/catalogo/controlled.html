@@ -18,7 +18,7 @@
             <!-- Contenedor de imagen principal y su descripción -->
             <div id="main-img-container">
                 <img id="main-img" src="" alt="">
-                <div id="modal-desc" class="descripcion"></div>
+                <div id="modal-product-name" class="product-title"></div> <!-- Nombre del producto -->             
             </div>
     
             <!-- Contenedor de miniaturas -->
@@ -26,23 +26,30 @@
                 <!-- Aquí se insertarán las miniaturas dinámicamente -->
             </div>
     
-            <!-- Contenedor de opciones (cantidad, talla, comprar) -->
+            <!-- Contenedor de opciones (cantidad, talla, comprar) -->            
             <div id="modal-options">
-                <div class="cantidad">
-                    <label for="cantidad">Cantidad:</label>
-                    <select id="cantidad">
-                        <!-- Opciones de 1 a 10 -->
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
+                <p id="modal-price" style="font-weight: bold; margin-bottom: 10px;">Precio: $0.00</p>
+                <div class="modal-desc">
+                    <p id="modal-product-description" class="descripcion"></p> <!-- Descripción del producto -->                   
+                </div>
+                <div class="delivery-group">
+                    <label for="city" class="cantidad-texto" style="color: black;">Cantidad</label>
+                    <div class="delivery-select-wrapper">
+                        <select id="cantidad" class="delivery-select">
+                            <option value="">Seleccione una Cantidad</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <i class="fas fa-chevron-down delivery-arrow"></i>
+                    </div>
                 </div>
     
                 <div class="talla">
@@ -162,7 +169,7 @@
     <section class="cat-products">
         <div class="cat-product-card"> <!--1--> 
             <img src="../../Images/controlled/producto1.webp" alt="img1" 
-            onclick="abrirModal('Controlled Insanity Pump Cover', 'Controlled Insanity Pump Cover', 
+            onclick="abrirModal('Controlled Insanity Pump Cover', 'Camisetas de gran peso diseñadas para durar toda la vida. Pueden usarse como una prenda para entrenar o para el día a día, con un diseño de doble capa hecho de material térmico. La cubierta controlada está pensada para ser usada como una prenda para entrenar, pero aún resalta las mejores partes del cuerpo.', 
             ['../../Images/controlled/producto1.webp', '../../Images/controlled/producto1.1.webp', '../../Images/controlled/producto1.2.webp', '../../Images/controlled/producto1.3.webp', '../../Images/controlled/producto1.4.webp'])">
             <h2>Controlled Insanity Pump Cover</h2>
             <p>$55.00</p>
@@ -170,7 +177,7 @@
         </div>
         <div class="cat-product-card"> <!--2-->
             <img src="../../Images/controlled/producto2.webp" alt="img2"
-                 onclick="abrirModal('Iron Therapy Pump Cover', 'Iron Therapy Pump Cover',
+                 onclick="abrirModal('Iron Therapy Pump Cover', 'Nuestra prenda insignia para entrenar ha tomado un nuevo look... La cubierta de entrenamiento oversized y de doble capa es más que un simple equipo; es una declaración de poder y dedicación. Con un peso considerable, mantiene tus músculos listos mientras irradia una energía de intensidad pura. Eleva tu entrenamiento y atrae miradas con la icónica Iron Therapy Pump Cover.',
                  ['../../Images/controlled/producto2.webp', '../../Images/controlled/producto2.1.webp', '../../Images/controlled/producto2.2.webp', '../../Images/controlled/producto2.3.webp', '../../Images/controlled/producto2.4.webp'])">
             <h2>Iron Therapy Pump Cover</h2>
             <p>$55.00</p>
@@ -179,7 +186,7 @@
         
         <div class="cat-product-card"> <!--3-->
             <img src="../../Images/controlled/producto3.1.webp" alt="img3"
-                 onclick="abrirModal('Rag Tops', 'Rag Tops',
+                 onclick="abrirModal('Rag Tops', 'Desata tu fuerza interior con nuestro Rag Top, que presenta un llamativo gráfico Controlled Insanity en el frente. Este top distintivo tiene una espalda abierta que resalta tus traps, permitiéndote mostrar tu físico trabajado. Hecho de tela de alta calidad y transpirable, garantiza comodidad y libertad de movimiento durante entrenamientos intensos. Perfecto para quienes quieren hacer una declaración audaz mientras entrenan, este rag top combina un diseño funcional con un poderoso impacto visual.',
                  ['../../Images/controlled/producto3.1.webp', '../../Images/controlled/producto3.webp', '../../Images/controlled/producto3.2.webp', '../../Images/controlled/producto3.3.webp', '../../Images/controlled/producto3.4.webp'])">
             <h2>Rag Tops</h2>
             <p>$35.00</p>
@@ -188,7 +195,7 @@
         
         <div class="cat-product-card"> <!--4-->
             <img src="../../Images/controlled/producto4.webp" alt="img4"
-                 onclick="abrirModal('Scorpion Acid Wash Stringer', 'Scorpion Acid Wash Stringer',
+                 onclick="abrirModal('Scorpion Acid Wash Stringer', 'Presentamos Project Scorpion, donde la resistencia se encuentra con el estilo. Cada prenda de esta colección encarna el espíritu del escorpión, un símbolo de fuerza, independencia, aislamiento y resistencia inquebrantable. Diseñada para aquellos que forjan su propio camino y se mantienen firmes por sí mismos. Project Scorpion ofrece más que solo ropa; es un testamento a la dureza perdurable y la fortaleza personal. Ya sea enfrentando los pesos en el gimnasio o los desafíos de la vida diaria, esta colección está creada para empoderarte a mantenerte resiliente contra todo obstáculo. Abraza la esencia del escorpión—abraza quién eres.',
                  ['../../Images/controlled/producto4.webp', '../../Images/controlled/producto4.1.webp', '../../Images/controlled/producto4.2.webp', '../../Images/controlled/producto4.3.webp', '../../Images/controlled/producto4.4.webp'])">
             <h2>Iron Therapy Heavyweight Tank Top</h2>
             <p>$35.00</p>
@@ -197,7 +204,7 @@
         
         <div class="cat-product-card"> <!--5-->
             <img src="../../Images/controlled/producto5.webp" alt="img5"
-                 onclick="abrirModal('Distressed Sweatpants', 'Distressed Sweatpants',
+                 onclick="abrirModal('Distressed Sweatpants', 'Pantalones deportivos de gran peso con parches desgastados. Diseñados para levantadores y culturistas intensos, estos pantalones ofrecen un ajuste seguro pero flexible. Cada rasgadura cuenta una historia de resiliencia, convirtiendo tu atuendo de gimnasio en una declaración de locura controlada. Su calidad gruesa permite un entrenamiento cómodo y duradero.',
                  ['../../Images/controlled/producto5.webp', '../../Images/controlled/producto5.1.webp', '../../Images/controlled/producto5.2.webp', '../../Images/controlled/producto5.3.webp', '../../Images/controlled/producto5.4.webp'])">
             <h2>Distressed Sweatpants</h2>
             <p>$65.00</p>
@@ -206,7 +213,7 @@
         
         <div class="cat-product-card"> <!--6-->
             <img src="../../Images/controlled/producto6.webp" alt="img6"
-                 onclick="abrirModal('Tactical Scorpion Cargo', 'Tactical Scorpion Cargo',
+                 onclick="abrirModal('Tactical Scorpion Cargo', 'Presentamos Project Scorpion, donde la resistencia se encuentra con el estilo. Cada prenda de esta colección encarna el espíritu del escorpión, un símbolo de fuerza, independencia, aislamiento y resistencia inquebrantable. Diseñada para aquellos que forjan su propio camino y se mantienen firmes por sí mismos.',
                  ['../../Images/controlled/producto6.webp', '../../Images/controlled/producto6.1.webp', '../../Images/controlled/producto6.2.webp', '../../Images/controlled/producto6.3.webp', '../../Images/controlled/producto6.4.webp'])">
             <h2>Tactical Scorpion Cargo</h2>
             <p>$65.00</p>
@@ -215,7 +222,7 @@
         
         <div class="cat-product-card"> <!--7-->
             <img src="../../Images/controlled/producto7.webp" alt="img7"
-                 onclick="abrirModal('Track Jacket', 'Track Jacket',
+                 onclick="abrirModal('Track Jacket', 'Viaja al pasado con nuestro Old School Bodybuilding Tracksuit, diseñado para evocar la era dorada del músculo y la dedicación. Este conjunto deportivo cuenta con un diseño retro inspirado en franjas contrastantes y un ajuste clásico que rememora el estilo de los culturistas legendarios. Hecho con tela duradera y de alta calidad, combina funcionalidad y comodidad, asegurando libertad de movimiento durante entrenamientos o para el uso casual. Los detalles icónicos, como el logo vintage y los acabados deportivos, rinden homenaje a la estética clásica del culturismo mientras ofrecen un rendimiento moderno.',
                  ['../../Images/controlled/producto7.webp', '../../Images/controlled/producto7.1.webp', '../../Images/controlled/producto7.2.webp', '../../Images/controlled/producto7.3.webp', '../../Images/controlled/producto7.4.webp'])">
             <h2>Track Jacket</h2>
             <p>$50.00</p>
@@ -224,7 +231,7 @@
         
         <div class="cat-product-card"> <!--8-->
             <img src="../../Images/controlled/producto8.webp" alt="img8"
-                 onclick="abrirModal('Exclusive Oreo Pump Cover', 'Exclusive Oreo Pump Cover',
+                 onclick="abrirModal('Exclusive Oreo Pump Cover', 'La Exclusive Oreo Pump Cover combina estilo y funcionalidad con un diseño único inspirado en las galletas Oreo. Hecha de material transpirable y resistente, ofrece un ajuste holgado para libertad de movimiento durante los entrenamientos. Ideal para usar antes o durante tus rutinas, esta prenda es perfecta para quienes buscan comodidad y un toque distintivo en su look deportivo.',
                  ['../../Images/controlled/producto8.webp', '../../Images/controlled/producto8.1.webp', '../../Images/controlled/producto8.2.webp', '../../Images/controlled/producto8.3.webp', '../../Images/controlled/producto8.4.webp'])">
             <h2>Exclusive Oreo Pump Cover</h2>
             <p>$60.00</p>
@@ -233,7 +240,7 @@
         
         <div class="cat-product-card"> <!--9-->
             <img src="../../Images/controlled/producto9.webp" alt="img9"
-                 onclick="abrirModal('Tactical Scorpion Hoodie', 'Tactical Scorpion Hoodie',
+                 onclick="abrirModal('Tactical Scorpion Hoodie', 'Project Scorpion ofrece más que solo ropa; es un testamento a la resistencia perdurable y la fortaleza personal. Ya sea enfrentando los pesos en el gimnasio o los desafíos de la vida diaria, esta colección está diseñada para empoderarte a mantenerte resiliente contra todo obstáculo. Abraza la esencia del escorpión—abraza quién eres.',
                  ['../../Images/controlled/producto9.webp', '../../Images/controlled/producto9.1.webp', '../../Images/controlled/producto9.2.webp', '../../Images/controlled/producto9.3.webp', '../../Images/controlled/producto9.4.webp'])">
             <h2>Tactical Scorpion Hoodie</h2>
             <p>$70.00</p>
@@ -242,7 +249,7 @@
         
         <div class="cat-product-card"> <!--10-->
             <img src="../../Images/controlled/producto10.webp" alt="img10"
-                 onclick="abrirModal('Rising Phoenix Cutoff', 'Rising Phoenix Cutoff',
+                 onclick="abrirModal('Rising Phoenix Cutoff', 'Presentamos el Rising Phoenix stone-washed cutoff de Controlled Insanity. Esta prenda única cuenta con un acabado desgastado que le da carácter y un toque vintage. El llamativo diseño del fénix simboliza el renacimiento y la resiliencia, siendo una declaración poderosa para quienes abrazan la transformación. Con un ajuste relajado y tela suave, este cutoff es perfecto para días cálidos o para usar en capas. Destácate y elévate con un look que encarna fuerza e individualidad.',
                  ['../../Images/controlled/producto10.webp', '../../Images/controlled/producto10.1.webp', '../../Images/controlled/producto10.2.webp', '../../Images/controlled/producto10.3.webp', '../../Images/controlled/producto10.4.webp'])">
             <h2>Rising Phoenix Cutoff</h2>
             <p>$40.00</p>
@@ -332,5 +339,10 @@
     <script src="../../javascript/productosCarrito.js"></script>
         
     <script src="../../script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => cargarProductos(3));
+    </script>
+    
 </body>
 </html>

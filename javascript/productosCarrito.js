@@ -1,93 +1,133 @@
-        let productoActual = '';
-        let descripcionActual = '';
-        let imagenesActuales = [];
-        let imagenPrincipal = '';
-        
+let productoActual = '';
+let descripcionActual = '';
+let imagenesActuales = [];
+let imagenPrincipal = '';
+let precioActual = 0;
 
-        function abrirModal(nombreProducto, descripcion, imagenes) {
-            productoActual = nombreProducto;
-            descripcionActual = descripcion;
-            imagenesActuales = imagenes;
+/*Funcion para cargar los productos desde la bd*/
+async function cargarProductos(categoria) {
+    try {
+        const response = await fetch(`/productos?categoria=${categoria}`);
+        if (!response.ok) throw new Error('Error al obtener los productos');
 
-            // Obtener el precio del producto desde el HTML de la tarjeta
-            const productoCard = Array.from(document.querySelectorAll(".cat-product-card"))
-                .find(card => card.querySelector("h2").textContent === nombreProducto);
+        const productos = await response.json();
 
-            if (productoCard) {
-                const precioTexto = productoCard.querySelector("p").textContent; // Buscar el texto del precio
-                precioActual = parseFloat(precioTexto.replace('$', '')); // Convertir el precio a número
-            } else {
-                console.error("No se encontró el producto en el listado.");
-                return;
-            }
+        const contenedorProductos = document.querySelector('.cat-products');
+        contenedorProductos.innerHTML = ''; // Limpia el contenedor
 
-            // Mostrar el modal
-            document.getElementById("modal").style.display = "flex";
+        productos.forEach(producto => {
+            const imagenes = Array.isArray(producto.imagenes) ? producto.imagenes : [];
+            const primeraImagen = imagenes[0] || '/path/to/default-image.webp'; // Imagen por defecto si no hay imágenes
 
-            // Establecer la primera imagen como principal
-            imagenPrincipal = imagenes[0];
-            document.getElementById("main-img").src = imagenPrincipal;
+            const descripcionEscapada = escaparTexto(producto.descripcion);
 
-            // Mostrar la descripción
-            document.getElementById("modal-desc").textContent = descripcion;
+            const imagenesCodificadas = JSON.stringify(imagenes)
+                .replace(/"/g, '&quot;') // Escapa comillas dobles
+                .replace(/'/g, "\\'"); // Escapa comillas simples
 
-            // Mostrar el precio en el modal (si es necesario añadirlo visualmente)
-            const modalOptions = document.getElementById("modal-options");
-            let modalPrice = document.getElementById("modal-price");
-            if (!modalPrice) {
-                modalPrice = document.createElement("p");
-                modalPrice.id = "modal-price";
-                modalPrice.style.fontWeight = "bold";
-                modalPrice.style.marginBottom = "10px";
-                modalOptions.insertBefore(modalPrice, modalOptions.firstChild);
-            }
-            modalPrice.textContent = `Precio: $${precioActual.toFixed(2)}`;
+            const tarjetaProducto = document.createElement('div');
+            tarjetaProducto.className = 'cat-product-card';
 
-            // Generar las imágenes en miniatura
-            const contenedorMiniaturas = document.getElementById("modal-img-container");
-            contenedorMiniaturas.innerHTML = '';
-            imagenes.forEach((imgSrc, index) => {
-                const img = document.createElement("img");
-                img.src = imgSrc;
-                img.className = "modal-img" + (index === 0 ? " active" : "");
-                img.onclick = function() {
-                    seleccionarImagenPrincipal(imgSrc);
-                };
-                contenedorMiniaturas.appendChild(img);
-            });
-        }
-        window.abrirModal = abrirModal;
+            tarjetaProducto.innerHTML = `
+                <img src="${primeraImagen}" alt="${producto.nombre}" 
+                     onclick="abrirModal('${producto.nombre}', '${descripcionEscapada}', ${imagenesCodificadas}, ${producto.precio_venta})">
+                <h2>${producto.nombre}</h2>
+                <p>$${producto.precio_venta ? parseFloat(producto.precio_venta).toFixed(2) : 'N/A'}</p>
+            `;
+
+            contenedorProductos.appendChild(tarjetaProducto);
+        });
+    } catch (error) {
+        console.error('Error al cargar productos:', error);
+    }
+}
 
 
-        function seleccionarImagenPrincipal(src) {
-            imagenPrincipal = src;
-            document.getElementById("main-img").src = src;
-
-            // Actualizar la clase activa en las miniaturas
-            const miniaturas = document.querySelectorAll(".modal-img");
-            miniaturas.forEach(img => img.classList.remove("active"));
-            document.querySelector(`.modal-img[src="${src}"]`).classList.add("active");
-        }
-        window.seleccionarImagenPrincipal=seleccionarImagenPrincipal;
-
-        function seleccionarTalla(elemento) {
-        const tallas = document.querySelectorAll('.talla-option');
-        tallas.forEach(talla => talla.classList.remove('active'));
-        elemento.classList.add('active');
-        // Puedes usar el atributo data-talla para obtener el valor seleccionado
-        const tallaSeleccionada = elemento.getAttribute('data-talla');
-        console.log('Talla seleccionada:', tallaSeleccionada);
-        }
-        window.seleccionarTalla = seleccionarTalla;
-
-        function cerrarModal() {
-            document.getElementById("modal").style.display = "none";
-        }
-
-        window.cerrarModal = cerrarModal;
+function escaparTexto(texto) {
+    return texto
+        .replace(/'/g, "\\'") // Escapa comillas simples
+        .replace(/"/g, '\\"'); // Escapa comillas dobles
+}
 
 
-        let carrito = [];
+
+
+
+
+/*Final de carga de productos*/
+
+
+function abrirModal(nombreProducto, descripcion, imagenes = [], precio) {
+    productoActual = nombreProducto;
+    descripcionActual = descripcion;
+    imagenesActuales = imagenes;
+    precioActual = precio; // Asigna el precio del producto al abrir el modal
+
+    console.log("Modal abierto con:", { nombreProducto, descripcion, imagenes, precio });
+
+    document.getElementById("modal").style.display = "flex";
+
+    // Establecer la primera imagen como principal
+    const mainImg = document.getElementById("main-img");
+    mainImg.src = imagenes.length > 0 ? imagenes[0] : '../../Images/logo1-nb-white.png';
+
+    // Mostrar el nombre del producto
+    document.getElementById("modal-product-name").textContent = nombreProducto;
+
+    // Mostrar la descripción del producto
+    document.getElementById("modal-product-description").textContent = descripcion;
+
+    // Mostrar el precio
+    const modalPrice = document.getElementById("modal-price");
+    modalPrice.textContent = `Precio: $${precio ? parseFloat(precio).toFixed(2) : 'N/A'}`;
+
+    // Generar miniaturas dinámicamente
+    const contenedorMiniaturas = document.getElementById("modal-img-container");
+    contenedorMiniaturas.innerHTML = ''; // Limpia las miniaturas previas
+    imagenes.forEach((imgSrc, index) => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.className = "modal-img" + (index === 0 ? " active" : ""); // Primera imagen activa
+        img.onclick = () => seleccionarImagenPrincipal(imgSrc); // Vincula la función
+        contenedorMiniaturas.appendChild(img);
+    });
+}
+      
+window.abrirModal = abrirModal;
+
+
+function seleccionarImagenPrincipal(src) {
+    imagenPrincipal = src;
+    document.getElementById("main-img").src = src;
+
+    // Actualizar la clase activa en las miniaturas
+    const miniaturas = document.querySelectorAll(".modal-img");
+    miniaturas.forEach(img => img.classList.remove("active"));
+    document.querySelector(`.modal-img[src="${src}"]`).classList.add("active");
+}
+window.seleccionarImagenPrincipal=seleccionarImagenPrincipal;
+
+function seleccionarTalla(elemento) {
+const tallas = document.querySelectorAll('.talla-option');
+tallas.forEach(talla => talla.classList.remove('active'));
+elemento.classList.add('active');
+// Puedes usar el atributo data-talla para obtener el valor seleccionado
+const tallaSeleccionada = elemento.getAttribute('data-talla');
+console.log('Talla seleccionada:', tallaSeleccionada);
+}
+window.seleccionarTalla = seleccionarTalla;
+
+function cerrarModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+window.cerrarModal = cerrarModal;
+
+
+/*Control Carrito */
+
+
+let carrito = [];
 
         document.addEventListener("DOMContentLoaded", cargarCarrito);
 
@@ -106,14 +146,15 @@
         function comprarProducto() {
             const cantidad = parseInt(document.getElementById("cantidad").value);
             const tallaBotonSeleccionado = document.querySelector(".talla-option.active");
+        
             if (!tallaBotonSeleccionado) {
                 alert("Por favor, selecciona una talla.");
                 return;
             }
-
+        
             const talla = tallaBotonSeleccionado.getAttribute("data-talla");
             alert(`Has comprado ${cantidad} unidad(es) de ${productoActual} en talla ${talla} :)`);
-            
+        
             // Datos del producto
             const producto = {
                 nombre: productoActual,
@@ -121,14 +162,15 @@
                 imagen: imagenPrincipal,
                 cantidad: cantidad,
                 talla: talla,
-                precio: precioActual, // Ajusta el precio según el producto
+                precio: precioActual, // Usar precioActual definido en abrirModal
             };
-
+        
             carrito.push(producto); // Agregar producto al carrito
             cerrarModal(); // Cierra el modal
             actualizarCarrito(); // Actualiza el carrito visualmente
             guardarCarrito(); // Guarda el carrito en localStorage
         }
+        
         window.comprarProducto = comprarProducto;
 
         const envioFijo = 5;

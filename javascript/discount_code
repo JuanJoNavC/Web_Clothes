@@ -1,0 +1,664 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const cartItems = JSON.parse(localStorage.getItem("carrito")) || [];
+    const cartItemsContainer = document.getElementById("pay-cart-items");
+    const subtotalElement = document.getElementById("pay-subtotal");
+    const shippingElement = document.getElementById("pay-shipping");
+    const ivaElement = document.getElementById("pay-iva");
+    const totalElement = document.getElementById("pay-total");
+    const discountInput = document.querySelector(".pay-discount-code input");
+    const discountButton = document.querySelector(".pay-discount-code button");
+    const appliedDiscountContainer = document.getElementById("applied-discount");
+    const discountCodeElement = document.getElementById("discount-code");
+    const discountPercentageElement = document.getElementById("discount-percentage");
+
+
+    /*Desde aqui se hace el control de correo con local storage*/
+    const accountInfo = document.getElementById("accountInfo");
+    const loggedEmail = document.getElementById("loggedEmail");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const logoutButton = document.getElementById("logoutButton");
+
+    // Leer usuario de localStorage
+    const loggedInUser = localStorage.getItem("loggedInUser");
+
+    if (loggedInUser) {
+        loggedEmail.textContent = loggedInUser; // Mostrar el correo
+    } else {
+        alert("Debe iniciar sesión para proceder con el pago.");
+        window.location.href = "../signIn.html";
+    }
+
+    // Alternar el menú desplegable y agregar margen
+    window.toggleDropdown = function () {
+        dropdownMenu.classList.toggle("hidden");
+
+        // Agregar o quitar margen dinámicamente
+        if (!dropdownMenu.classList.contains("hidden")) {
+            accountInfo.style.marginBottom = "60px"; // Añade un margen cuando está abierto
+        } else {
+            accountInfo.style.marginBottom = "30px"; // Elimina el margen cuando está cerrado
+        }
+    };
+
+    // Cerrar sesión
+    logoutButton.addEventListener("click", function () {
+        localStorage.removeItem("loggedInUser");
+        alert("Sesión cerrada. Debe iniciar sesión para proceder con el pago.");
+        window.location.href = "../signIn.html";
+    });
+    /*Fin de control de correo*/
+
+
+
+
+    /*Obtener los paises*/
+    const countrySelect = document.getElementById("country");
+
+    // Función para obtener los países desde la API
+    async function loadCountries() {
+        try {
+            const response = await fetch("/paises");
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const countries = await response.json();
+            countrySelect.innerHTML = '<option value="">Seleccione un país</option>';
+            countries.forEach((country) => {
+                const option = document.createElement("option");
+                option.value = country.id;
+                option.textContent = country.nombre;
+                countrySelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error("Error al cargar los países:", error.message);
+            alert("No se pudieron cargar los países.");
+        }
+    }
+
+    // Cargar países al cargar la página
+    loadCountries();
+
+    /*Cerrar obtener paises*/
+
+
+
+
+    /*Obtener las ciudades*/
+    const citySelect = document.getElementById("city");
+    
+    // Función para obtener ciudades según el país seleccionado
+    async function loadCities(countryId) {
+        try {
+            const response = await fetch(`/ciudades/${countryId}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const cities = await response.json();
+    
+            // Limpiar el select de ciudades
+            citySelect.innerHTML = '<option value="">Seleccione una ciudad</option>';
+    
+            // Poblar el select con las ciudades
+            cities.forEach((city) => {
+                const option = document.createElement("option");
+                option.value = city.id;
+                option.textContent = city.nombre;
+                citySelect.appendChild(option);
+            });
+    
+            console.log("Ciudades cargadas exitosamente.");
+        } catch (error) {
+            console.error("Error al cargar las ciudades:", error);
+            citySelect.innerHTML = '<option value="">No se pudieron cargar las ciudades</option>';
+        }
+    }
+    
+    // Evento para cargar ciudades cuando se selecciona un país
+    countrySelect.addEventListener("change", () => {
+        const selectedCountryId = countrySelect.value;
+    
+        if (selectedCountryId) {
+            loadCities(selectedCountryId); // Cargar ciudades del país seleccionado
+        } else {
+            // Limpiar el select si no hay país seleccionado
+            citySelect.innerHTML = '<option value="">Seleccione una ciudad</option>';
+        }
+    });
+    /*Cerrar obtener ciudades*/
+
+
+
+    /*Obtener nombres y telefono*/
+    console.log(localStorage.getItem("loggedInUser" + "Para obtener usuario"));
+    // Verificar que el usuario está logueado
+    if (loggedInUser) {
+        fetch(`/usuarios/datos?correo=${loggedInUser}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("No se pudieron obtener los datos del usuario.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Llenar los campos de nombre y teléfono
+                const firstNameInput = document.getElementById("firstName");
+                const phoneInput = document.getElementById("phone");
+                firstNameInput.value = data.nombre;
+                phoneInput.value = data.telefono;
+            })
+            .catch(error => {
+                console.error("Error al obtener los datos del usuario:", error);
+            });
+    } else {
+        console.error("No hay usuario logueado en localStorage.");
+    }
+
+    /*Cerrar obtener nombres y telefono*/
+
+
+
+    let subtotal = 0;
+    const envioFijo = 5; // Tarifa fija de envío
+    const envioGratisLimite = 100; // Límite para envío gratuito
+    const ivaPorcentaje = 0.15; // IVA 15%
+    let descuentoAplicado = 0; // Para guardar el porcentaje de descuento aplicado
+    let codigoAplicado = ""; // Para guardar el código ya aplicado  
+
+    // Generar los productos en el carrito
+    cartItems.forEach(product => {
+        subtotal += product.precio * product.cantidad;
+
+        const item = document.createElement("div");
+        item.classList.add("pay-cart-item");
+        item.innerHTML = `
+            <img src="${product.imagen}" alt="${product.nombre}">
+            <div class="pay-cart-item-details">
+                <p><strong>${product.nombre}</strong></p>
+                <p class="pay-cart-item-size">Talla: ${product.talla || "N/A"}</p>
+                <p class="pay-cart-item-size">Cantidad: x${product.cantidad || "N/A"}</p>
+            </div>
+            <p class="pay-cart-item-price">$${(product.precio * product.cantidad).toFixed(2)}</p>
+        `;
+        cartItemsContainer.appendChild(item);
+    });
+
+    // Calcular y actualizar los totales
+    function actualizarTotales() {
+        const iva = subtotal * ivaPorcentaje;
+        const envio = subtotal >= envioGratisLimite ? 0 : envioFijo;
+        let total = subtotal + iva + envio;
+
+        // Aplicar descuento si existe
+        if (descuentoAplicado > 0) {
+            total -= total * (descuentoAplicado / 100);
+        }
+
+        subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+        ivaElement.textContent = `$${iva.toFixed(2)}`;
+        shippingElement.textContent = `$${envio.toFixed(2)}`;
+        totalElement.textContent = `$${total.toFixed(2)}`;
+    }
+
+    actualizarTotales();
+
+    // Validar y aplicar el código de descuento
+    discountButton.addEventListener("click", async function () {
+        const code = discountInput.value.trim();
+
+        if (!code) {
+            alert("Por favor, ingresa un código de descuento.");
+            return;
+        }
+
+        if (code === codigoAplicado) {
+            alert("Este código ya ha sido aplicado.");
+            return;
+        }
+
+        try {
+            const response = await fetch("/validate-discount-code", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ code })
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.valido) {
+                descuentoAplicado = Math.round(result.porcentaje) + '%';
+                codigoAplicado = code;
+
+                // Mostrar contenedor del descuento
+                discountCodeElement.textContent = code;
+                discountPercentageElement.textContent = descuentoAplicado;
+                appliedDiscountContainer.style.display = "flex"; // Mostrar con estilos
+                document.getElementById("applied-discount-percentage").style.display = "flex"; // Mostrar el porcentaje de descuento
+
+                alert(`¡Código aplicado! Se ha descontado un ${descuentoAplicado} del total.`);
+                discountInput.value = '';
+                actualizarTotales();
+            } else {
+                alert(result.mensaje || "El código no es válido.");
+            }
+        } catch (error) {
+            console.error("Error al validar el código:", error);
+            alert("Hubo un error al validar el código. Inténtalo de nuevo más tarde.");
+        }
+    });
+});
+
+//Cambio de interfaz
+function togglePaymentMethod(method) {
+    const cardDetails = document.getElementById('card-details');
+    const paypalDetails = document.getElementById('paypal-details');
+    const payButton = document.getElementById('pay-button');
+
+    if (method === 'card') {
+        cardDetails.classList.remove('hidden');
+        paypalDetails.classList.add('hidden');
+        payButton.textContent = 'Pagar ahora';
+    } else if (method === 'paypal') {
+        cardDetails.classList.add('hidden');
+        paypalDetails.classList.remove('hidden');
+        payButton.textContent = 'Pagar con PayPal';
+    }
+    // Evento al botón de pago
+    payButton.addEventListener('click', () => {
+        if (method === 'card') {
+            alert("Su pedido ah sido realizado de manera correcta :)");
+        } else if (method === 'paypal') {
+            window.open(
+                'https://www.paypal.com/checkout',
+                '_blank',
+                'width=600,height=600,scrollbars=yes,resizable=yes'
+            );
+        }
+    });
+}
+
+
+//Pago con tarjetas
+// Referencias a elementos
+const cardNumberInput = document.getElementById('card-number');
+const expiryDateInput = document.getElementById('expiry-date');
+const cvcCodeInput = document.getElementById('cvc-code');
+const visaLogo = document.getElementById('visa-logo');
+const mastercardLogo = document.getElementById('mastercard-logo');
+const amexLogo = document.getElementById('amex-logo');
+
+// Formatear número de tarjeta y cambiar logos dinámicamente
+cardNumberInput.addEventListener('input', (e) => {
+    let cardNumber = cardNumberInput.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+    let formattedNumber = '';
+    let maxLength = 16; // Longitud máxima para Visa y MasterCard
+    let logoType = null;
+
+    // Detectar tarjeta según los dígitos iniciales y definir formato
+    if (/^4/.test(cardNumber)) {
+        logoType = 'visa';
+        formattedNumber = cardNumber.match(/.{1,4}/g)?.join(' ') || cardNumber; // Grupos de 4
+    } else if (/^5[1-5]/.test(cardNumber)) {
+        logoType = 'mastercard';
+        formattedNumber = cardNumber.match(/.{1,4}/g)?.join(' ') || cardNumber; // Grupos de 4
+    } else if (/^3[47]/.test(cardNumber)) {
+        logoType = 'amex';
+        maxLength = 15; // American Express tiene un máximo de 15 dígitos
+        formattedNumber = cardNumber.match(/.{1,4}/g)?.slice(0, 2).join(' ') || cardNumber; // Grupos de 4 y 6
+        if (cardNumber.length > 10) {
+            formattedNumber += ` ${cardNumber.slice(10)}`; // Agregar el último grupo
+        }
+    } else {
+        formattedNumber = cardNumber.match(/.{1,4}/g)?.join(' ') || cardNumber; // Grupos de 4 por defecto
+    }
+
+    // Limitar longitud máxima de la entrada según el tipo detectado
+    cardNumberInput.value = formattedNumber.slice(0, maxLength + Math.floor(maxLength / 4)); // Incluye espacios
+
+    // Actualizar visibilidad de los logos
+    [visaLogo, mastercardLogo, amexLogo].forEach(logo => logo.classList.remove('active'));
+    if (logoType === 'visa') {
+        visaLogo.classList.add('active');
+    } else if (logoType === 'mastercard') {
+        mastercardLogo.classList.add('active');
+    } else if (logoType === 'amex') {
+        amexLogo.classList.add('active');
+    }
+});
+
+// Validar fecha de expiración
+expiryDateInput.addEventListener('input', (e) => {
+    const value = e.target.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+    if (value.length >= 3) {
+        expiryDateInput.value = `${value.slice(0, 2)}/${value.slice(2, 4)}`;
+    } else {
+        expiryDateInput.value = value;
+    }
+
+    // No permitir el "/" si no hay dos dígitos antes
+    if (value.length < 2 && expiryDateInput.value.includes('/')) {
+        expiryDateInput.value = expiryDateInput.value.replace('/', '');
+    }
+});
+
+// Limitar código de seguridad a 4 dígitos
+cvcCodeInput.addEventListener('input', () => {
+    cvcCodeInput.value = cvcCodeInput.value.replace(/\D/g, '').slice(0, 4);
+});
+
+
+
+
+
+/*Generar la factura en la bd*/
+
+// Verificar si el DOM ha cargado antes de agregar el evento
+document.addEventListener("DOMContentLoaded", () => {
+    // Vincular la función guardarFactura al botón
+    const payButton = document.getElementById("pay-button");
+
+    if (payButton) {
+        payButton.addEventListener("click", guardarFactura);
+        console.log("Evento 'click' vinculado al botón 'Pagar ahora'.");
+    } else {
+        console.error("No se encontró el botón con ID 'pay-button'.");
+    }
+});
+
+async function obtenerUsuarioPorCorreo(correo) {
+    try {
+        const response = await fetch(`/usuario/${correo}`);
+        if (response.ok) {
+            const usuario = await response.json();
+            return usuario.id_usuario; // Devuelve el ID del usuario
+        } else {
+            console.error("Error al obtener el usuario:", await response.text());
+            return null;
+        }
+    } catch (error) {
+        console.error("Error al hacer la solicitud:", error);
+        return null;
+    }
+}
+
+async function obtenerClientePorUsuario(idUsuario) {
+    try {
+        const response = await fetch(`/api/cliente/${idUsuario}`);
+        if (response.ok) {
+            const data = await response.json();
+            return data.id_cliente; // Devuelve el id_cliente
+        } else {
+            console.error("Error al obtener el cliente:", await response.text());
+            return null;
+        }
+    } catch (error) {
+        console.error("Error en la solicitud:", error);
+        return null;
+    }
+}
+
+function formatDateToMySQL(date) {
+    const d = new Date(date);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mi = String(d.getMinutes()).padStart(2, '0');
+    const ss = String(d.getSeconds()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}`;
+}
+
+async function obtenerIdProducto(nombre) {
+    try {
+        const response = await fetch(`/api/producto?nombre=${encodeURIComponent(nombre)}`);
+        if (response.ok) {
+            const data = await response.json();
+            return data.id_producto; // Devuelve el ID del producto
+        } else {
+            console.error(`Error al obtener id_producto para el nombre: ${nombre}`);
+            return null;
+        }
+    } catch (error) {
+        console.error("Error en la solicitud para obtener id_producto:", error);
+        return null;
+    }
+}
+
+
+
+
+async function guardarFactura() {
+    try {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+        const usuarioId = await obtenerUsuarioPorCorreo(loggedInUser);
+        const clienteId = await obtenerClientePorUsuario(usuarioId);
+
+        const paisId = document.getElementById("country").value;
+        const ciudadId = document.getElementById("city").value;
+        const direccion = document.getElementById("address").value;
+        const codigoPostal = document.getElementById("postalCode").value;
+        const metodoPago = document.querySelector('input[name="payment-method"]:checked').value === "card" ? 1 : 2;
+
+        const subtotal = parseFloat(document.getElementById("pay-subtotal").textContent.replace("$", ""));
+        const envio = parseFloat(document.getElementById("pay-shipping").textContent.replace("$", ""));
+        const iva = parseFloat(document.getElementById("pay-iva").textContent.replace("$", ""));
+        const total = parseFloat(document.getElementById("pay-total").textContent.replace("$", ""));
+        const estado = "Pagada";
+
+        const fechaMySQL = formatDateToMySQL(new Date());
+
+        const productos = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        if (!Array.isArray(productos) || productos.length === 0) {
+            console.error("El carrito está vacío.");
+            alert("El carrito está vacío.");
+            return;
+        }
+
+        console.log("Datos recopilados:", {
+            usuarioId, clienteId, paisId, ciudadId, direccion, codigoPostal, metodoPago, subtotal, envio, iva, total, estado, productos
+        });
+
+        // Paso 1: Verificar stock disponible
+        for (const producto of productos) {
+            if (!producto.id_producto || !producto.id_talla) {
+                console.warn("Producto con datos incompletos:", producto);
+
+                // Buscar id_producto y id_talla usando el nombre y la talla
+                const productoResponse = await fetch(
+                    `/api/productos/buscar?nombre=${encodeURIComponent(producto.nombre)}&talla=${encodeURIComponent(producto.talla)}`
+                );
+
+                if (!productoResponse.ok) {
+                    console.error("No se pudo obtener los datos del producto:", producto.nombre);
+                    alert(`No se pudo verificar el stock del producto: ${producto.nombre}`);
+                    return;
+                }
+
+                const productoData = await productoResponse.json();
+                producto.id_producto = productoData.id_producto;
+                producto.id_talla = productoData.id_talla; // Esto ahora debería ser correcto
+            }
+
+            // Consulta el stock disponible para el producto y la talla
+            const stockResponse = await fetch(
+                `/api/stock?id_producto=${producto.id_producto}&id_talla=${producto.id_talla}`
+            );
+
+            if (!stockResponse.ok) {
+                console.error(`Error al consultar el stock para el producto ${producto.nombre}`);
+                alert(`No se pudo verificar el stock del producto: ${producto.nombre}`);
+                return;
+            }
+
+            const stockData = await stockResponse.json();
+
+            if (stockData.stock < producto.cantidad) {
+                console.error(`Stock insuficiente para el producto ${producto.nombre}. Disponible: ${stockData.stock}, Requerido: ${producto.cantidad}`);
+                alert(`Stock insuficiente para el producto ${producto.nombre}. Disponible: ${stockData.stock}, Requerido: ${producto.cantidad}`);
+                return; // Detener el proceso si no hay suficiente stock
+            }
+        }
+
+        // Paso 2: Reducir el stock
+        for (const producto of productos) {
+            const response = await fetch("/api/stock", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id_producto: producto.id_producto,
+                    id_talla: producto.id_talla,
+                    cantidad: producto.cantidad,
+                }),
+            });
+
+            if (!response.ok) {
+                console.error(`Error al reducir el stock para el producto ${producto.nombre}`);
+                alert(`No se pudo actualizar el stock del producto: ${producto.nombre}`);
+                return;
+            }
+        }
+
+
+
+        
+        // Paso 2: Guardar la dirección
+        const direccionResponse = await fetch('/api/direcciones', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_usuario: usuarioId, id_ciudad: ciudadId, direccion, codigo_postal: codigoPostal })
+        });
+        const nuevaDireccion = await direccionResponse.json();
+
+        // Paso 3: Crear la factura
+        const facturaResponse = await fetch('/api/facturas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_usuario: usuarioId, id_direccion: nuevaDireccion.id_direccion, id_metodo_pago: metodoPago, fecha: fechaMySQL, subtotal, iva, total, estado })
+        });
+        const nuevaFactura = await facturaResponse.json();
+        console.log("Factura creada:", nuevaFactura);
+
+        // Paso 4: Relacionar cliente y factura
+        await fetch('/api/cliente_factura', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_cliente: clienteId, id_factura: nuevaFactura.id_factura })
+        });
+
+        // Paso 5: Agregar los detalles de la factura y actualizar el stock
+        for (const producto of productos) {
+            // Obtener el id_producto por el nombre
+            const response = await fetch(`/api/producto?nombre=${encodeURIComponent(producto.nombre)}`);
+            if (!response.ok) {
+                console.error("No se pudo obtener el id_producto para el producto:", producto.nombre);
+                continue;
+            }
+            const data = await response.json();
+            const id_producto = data.id_producto;
+
+            console.log("Agregando detalle de factura:", {
+                id_factura: nuevaFactura.id_factura,
+                id_producto,
+                cantidad: producto.cantidad,
+                precio_unitario: producto.precio,
+                subtotal: producto.precio * producto.cantidad,
+            });
+
+            // Insertar el detalle en la base de datos
+            await fetch('/api/detalles_factura', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id_factura: nuevaFactura.id_factura,
+                    id_producto,
+                    cantidad: producto.cantidad,
+                    precio_unitario: producto.precio,
+                    subtotal: producto.precio * producto.cantidad
+                })
+            });
+
+            // Actualizar el stock en la base de datos
+            await fetch('/api/stock', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id_producto,
+                    id_talla: producto.id_talla,
+                    cantidad: producto.cantidad
+                })
+            });
+        }
+
+        alert("Factura creada exitosamente.");
+        localStorage.removeItem("carrito"); // Limpiar el carrito después de guardar
+    } catch (error) {
+        console.error("Error al guardar la factura:", error);
+        alert("Hubo un problema al procesar el pago.");
+    }
+}
+
+
+
+
+
+
+
+/*Formulario localstorage*/
+
+// Función para guardar los datos del formulario en localStorage
+function guardarFormularioEnLocalStorage() {
+    const formulario = {
+        paisId: document.getElementById("country").value,
+        ciudadId: document.getElementById("city").value,
+        direccion: document.getElementById("address").value,
+        codigoPostal: document.getElementById("postalCode").value,
+        nombre: document.getElementById("firstName").value,
+        apellido: document.getElementById("lastName").value,
+        apartamento: document.getElementById("apartment").value,
+        telefono: document.getElementById("phone").value,
+        metodoPago: document.querySelector('input[name="payment-method"]:checked')?.value || null,
+    };
+    localStorage.setItem("formularioPago", JSON.stringify(formulario));
+}
+
+// Función para restaurar los datos del formulario desde localStorage
+function restaurarFormularioDesdeLocalStorage() {
+    const formularioGuardado = JSON.parse(localStorage.getItem("formularioPago"));
+    if (formularioGuardado) {
+        document.getElementById("country").value = formularioGuardado.paisId || "";
+        document.getElementById("city").value = formularioGuardado.ciudadId || "";
+        document.getElementById("address").value = formularioGuardado.direccion || "";
+        document.getElementById("postalCode").value = formularioGuardado.codigoPostal || "";
+        document.getElementById("firstName").value = formularioGuardado.nombre || "";
+        document.getElementById("lastName").value = formularioGuardado.apellido || "";
+        document.getElementById("apartment").value = formularioGuardado.apartamento || "";
+        document.getElementById("phone").value = formularioGuardado.telefono || "";
+        if (formularioGuardado.metodoPago) {
+            const metodoPagoRadio = document.querySelector(`input[name="payment-method"][value="${formularioGuardado.metodoPago}"]`);
+            if (metodoPagoRadio) metodoPagoRadio.checked = true;
+        }
+    }
+}
+
+// Escuchar cambios en los campos del formulario para guardarlos automáticamente
+function escucharCambiosFormulario() {
+    const inputs = document.querySelectorAll(
+        "#country, #city, #address, #postalCode, #firstName, #lastName, #apartment, #phone, input[name='payment-method']"
+    );
+    inputs.forEach(input => {
+        input.addEventListener("input", guardarFormularioEnLocalStorage);
+        input.addEventListener("change", guardarFormularioEnLocalStorage);
+    });
+}
+
+// Inicializar restauración y eventos de guardado al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    restaurarFormularioDesdeLocalStorage();
+    escucharCambiosFormulario();
+});

@@ -392,6 +392,10 @@ body.dark-mode .talla label {
     color: #f0f0f0; /* Texto claro */
 }
 
+body.dark-mode .cantidad-texto{
+    color: #ffffff;
+}
+
 body.dark-mode .cantidad select {
     background-color: #444; /* Fondo oscuro del selector */
     color: #fff; /* Texto claro */
@@ -1912,6 +1916,21 @@ p {
     margin: 40px 0; /* Margen superior e inferior */
 }
 
+.product-title {
+    font-size: 18px; /* Tamaño destacado */
+    font-weight: 700; /* Negrita para resaltar */
+    color: #000000; /* Color neutro que combina bien */
+    text-align: center; /* Centrado en su contenedor */
+    margin-top: 5px; /* Espaciado inferior */
+}
+
+
+@media (max-width: 768px) {
+    .product-title {
+        font-size: 16px; /* Reduce ligeramente el tamaño */
+    }
+}
+
 
 /* Columna izquierda: Imagen principal */
 #main-img-container {
@@ -1955,6 +1974,37 @@ p {
     border-color: #000;
 }
 
+/* Descripcion de productos */
+.modal-desc {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #000000;
+    text-align: justify;
+    padding: 15px 0px;
+    border-top: 1px solid #ddd; /* Línea superior para separación */
+    border-bottom: 1px solid #ddd;
+    margin-top: 5px; /* Espacio superior */
+    
+    /* Propiedades añadidas para tamaño fijo y scroll */
+    max-height: 200px; /* Altura máxima fija */
+    overflow-y: auto;  /* Habilita scroll vertical si excede el tamaño */
+    background-color: #ffffff; /* Fondo blanco para legibilidad */
+}
+
+.modal-desc ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+    color: #333;
+    font-size: 14px;
+}
+
+.modal-desc ul li {
+    margin-bottom: 5px; /* Espacio entre ítems */
+}
+
+
 /* Columna derecha: Opciones */
 #modal-options {
     display: flex;
@@ -1986,6 +2036,10 @@ p {
 .talla label {
     font-size: 16px;
     font-weight: bold;
+}
+
+.cantidad-texto{
+    font-size: 1rem; color: #000000; font-weight: 700;
 }
 
 .cantidad select {
@@ -2081,9 +2135,28 @@ p {
         gap: 10px; /* Espacio entre el texto y el selector */
     }
 
+    .select-wrapper {
+        position: relative; /* Contenedor relativo para el ícono */
+        width: fit-content; /* Ajusta el tamaño al contenido */
+    }
+
+    .select-wrapper select {
+        padding: 8px 30px 8px 8px; /* Deja espacio para la flecha */
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        color: black;
+        appearance: none; /* Oculta la flecha predeterminada del navegador */
+        width: 100%; /* Ajusta el ancho al contenedor */
+    }
+
     .cantidad label {
-        font-size: 16px; /* Ajustar tamaño del texto */
+        display: flex;
+        align-items: center;
+        font-size: 16px;
         font-weight: bold;
+        position: relative; /* Necesario para posicionar el ícono */
+        gap: 5px; /* Espaciado entre el texto y el selector */
     }
 
     .cantidad select {
@@ -2091,8 +2164,10 @@ p {
         font-size: 14px;
         border-radius: 5px;
         border: 1px solid #ddd;
-        width: auto; /* Ajustar tamaño al contenido */
+        width: 100%; /* Ajusta el ancho al contenedor */
         color: black;
+        appearance: none; /* Ocultar flecha predeterminada del navegador */
+        position: relative;
     }
 
     /* Botones de tallas más pequeños */
@@ -2425,10 +2500,7 @@ input[type="password"],
 input[type="text"], 
 input[type="date"] {
     width: 100%;
-    padding: 15px;
-    font-size: 1rem;
     border: 1px solid #ddd;
-    border-radius: 30px; /* Redondeado */
     transition: all 0.3s ease;
     box-sizing: border-box; /* Asegura que el padding no agrande los inputs */
 }
@@ -2657,6 +2729,12 @@ textarea:focus {
 .pay-card-logos img {
     height: 24px;
     margin: 0 5px;
+    opacity: 0.3; /* Inicialmente más translúcidos */
+    transition: opacity 0.3s ease;
+}
+
+.pay-card-logos img.active {
+    opacity: 1; /* Opacidad máxima cuando están activos */
 }
 
 .pay-card-details {
@@ -2665,7 +2743,8 @@ textarea:focus {
 
 .pay-input {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
+    font-size: 14px;
     margin: 5px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -2681,12 +2760,265 @@ textarea:focus {
     flex: 1;
 }
 
+/*Contenido sobre la cuenta en checkout*/
+
+.account-info {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    position: relative;
+    transition: margin 0.1s ease; /* Transición suave para el margen */
+    padding-bottom: 10px; /* Espacio entre contenido y línea */
+    border-bottom: 1px solid #ccc; /* Línea de separación */
+    margin-bottom: 30px;
+}
+
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    color: #000000;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+}
+
+.dropdown-toggle:hover {
+    color: #000;
+}
+
+.account-email {
+    display: block;
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+}
+
+.dropdown-menu {
+    margin-top: 8px;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.dropdown-menu.hidden {
+    display: none;
+}
+
+.logout-checkout-button {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 4px;
+    text-align: center;
+}
+
+.logout-checkout-button:hover {
+    background-color: #d6d6d6;
+}
+
+
+/* Delivery */
+.delivery-form {
+    width: 100%;
+    margin: 30px 0px 40px 0px;
+    font-family: Arial, sans-serif;
+}
+
+.delivery-form h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.delivery-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.delivery-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.delivery-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none; /* Oculta la flecha predeterminada */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.delivery-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #555;
+    pointer-events: none; /* Para no bloquear la interacción con el select */
+}
+
+.delivery-select:focus {
+    outline: none;
+    border-color: #000000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.delivery-group-row {
+    display: flex;
+    gap: 10px;
+}
+
+.delivery-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.info-icon {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #000000; /* Cambia el color si lo prefieres */
+    position: relative;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    top: -50%; /* Justo debajo del ícono */
+    left: 100%;
+    z-index: 10;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-icon:hover + .tooltip {
+    display: block;
+}
+
+.delivery-input,
+.delivery-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+}
+
+.delivery-input:focus,
+.delivery-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.delivery-select {
+    height: 40px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.delivery-group-row .delivery-group {
+    flex: 1;
+}
+
+.delivery-input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Estilo para el contenedor del checkbox */
 .pay-checkbox {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
+    color: #333;
     gap: 8px;
-    margin-top: 10px;
+    position: relative;
 }
+
+/* Ocultar el checkbox original */
+.styled-checkbox {
+    display: none;
+}
+
+/* Estilo para el nuevo checkbox visual */
+.checkbox-custom {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #007BFF;
+    border-radius: 4px;
+    background-color: #fff;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px; /* Tamaño del ícono */
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Estado cuando está marcado */
+.styled-checkbox:checked + .checkbox-custom {
+    background-color: #007BFF;
+    border-color: #0056b3;
+}
+
+.styled-checkbox:checked + .checkbox-custom i {
+    display: block;
+}
+
+/* Esconder el ícono cuando no está marcado */
+.checkbox-custom i {
+    display: none;
+}
+
+/* Hover effect */
+.checkbox-custom:hover {
+    border-color: #0056b3;
+}
+
 
 .pay-pay-now-btn {
     background: linear-gradient(to right, #000000 50%, #ffffff 50%);
@@ -2770,9 +3102,23 @@ textarea:focus {
 
 .pay-summary-line {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Espaciado entre texto y valor */
+    align-items: center; /* Centra verticalmente todos los elementos */
+    padding: 10px 0; /* Espaciado vertical entre las líneas */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc; /* Opcional: separador entre líneas */
+}
+
+.pay-summary-line p {
+    margin: 0; /* Elimina márgenes para asegurar alineación vertical */
+}
+
+.pay-summary-line span {
+    margin: 0; /* Elimina márgenes adicionales */
+    display: flex; /* Necesario si hay problemas con contenido interno */
+    align-items: center; /* Asegura que el contenido interno del span esté centrado */
+    text-align: right; /* Alinea texto del span a la derecha */
     font-size: 14px;
-    margin-bottom: 10px;
 }
 
 .pay-summary-line.total {

@@ -121,7 +121,7 @@
             <!-- Contenedor de imagen principal y su descripción -->
             <div id="main-img-container">
                 <img id="main-img" src="" alt="">
-                <div id="modal-desc" class="descripcion"></div>
+                <div id="modal-product-name" class="product-title"></div> <!-- Nombre del producto -->             
             </div>
     
             <!-- Contenedor de miniaturas -->
@@ -129,23 +129,30 @@
                 <!-- Aquí se insertarán las miniaturas dinámicamente -->
             </div>
     
-            <!-- Contenedor de opciones (cantidad, talla, comprar) -->
+            <!-- Contenedor de opciones (cantidad, talla, comprar) -->            
             <div id="modal-options">
-                <div class="cantidad">
-                    <label for="cantidad">Cantidad:</label>
-                    <select id="cantidad">
-                        <!-- Opciones de 1 a 10 -->
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
+                <p id="modal-price" style="font-weight: bold; margin-bottom: 10px;">Precio: $0.00</p>
+                <div class="modal-desc">
+                    <p id="modal-product-description" class="descripcion"></p> <!-- Descripción del producto -->                   
+                </div>
+                <div class="delivery-group">
+                    <label for="city" class="cantidad-texto" style="color: black;">Cantidad</label>
+                    <div class="delivery-select-wrapper">
+                        <select id="cantidad" class="delivery-select">
+                            <option value="">Seleccione una Cantidad</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <i class="fas fa-chevron-down delivery-arrow"></i>
+                    </div>
                 </div>
     
                 <div class="talla">
@@ -161,93 +168,9 @@
             </div>
         </div>
     </div>
+    
     <section class="cat-products">
-        <div class="cat-product-card"> <!--1--> 
-            <img src="../../Images/gymsharkimg/producto1.webp" alt="img1" 
-            onclick="abrirModal('Lifting Club T-Shirt', 'Lifting Club T-Shirt', 
-            ['../../Images/gymsharkimg/producto1.webp', '../../Images/gymsharkimg/producto1.1.webp', '../../Images/gymsharkimg/producto1.2.webp', '../../Images/gymsharkimg/producto1.3.webp', '../../Images/gymsharkimg/producto1.4.webp'])">
-            <h2>Lifting Club T-Shirt</h2>
-            <p>$55.00</p>
-            
-        </div>
         
-        <div class="cat-product-card"> <!--2--> 
-            <img src="../../Images/gymsharkimg/producto2.webp" alt="img2" 
-            onclick="abrirModal('Crest Hoodie', 'Crest Hoodie', 
-            ['../../Images/gymsharkimg/producto2.webp', '../../Images/gymsharkimg/producto2.1.webp', '../../Images/gymsharkimg/producto2.2.webp', '../../Images/gymsharkimg/producto2.3.webp', '../../Images/gymsharkimg/producto2.4.webp'])">
-            <h2>Crest Hoodie</h2>
-            <p>$50.00</p>
-        </div>
-        
-        <div class="cat-product-card"> <!--3--> 
-            <img src="../../Images/gymsharkimg/producto3.webp" alt="img3" 
-            onclick="abrirModal('Movin Metal Graphic T-Shirt', 'Movin Metal Graphic T-Shirt', 
-            ['../../Images/gymsharkimg/producto3.webp', '../../Images/gymsharkimg/producto3.1.webp', '../../Images/gymsharkimg/producto3.2.webp', '../../Images/gymsharkimg/producto3.3.webp', '../../Images/gymsharkimg/producto3.4.webp'])">
-            <h2>Movin Metal Graphic T-Shirt</h2>
-            <p>$38.00</p>
-        </div>
-        
-        <div class="cat-product-card"> <!--4--> 
-            <img src="../../Images/gymsharkimg/producto4.webp" alt="img4" 
-            onclick="abrirModal('Power T-Shirt', 'Power T-Shirt', 
-            ['../../Images/gymsharkimg/producto4.webp', '../../Images/gymsharkimg/producto4.1.webp', '../../Images/gymsharkimg/producto4.2.webp', '../../Images/gymsharkimg/producto4.3.webp', '../../Images/gymsharkimg/producto4.4.webp'])">
-            <h2>Power T-Shirt</h2>
-            <p>$55.00</p>
-        </div>
-        
-        <div class="cat-product-card"> <!--5--> 
-            <img src="../../Images/gymsharkimg/producto5.webp" alt="img5" 
-            onclick="abrirModal('Graphic Baselayer T-Shirt', 'Graphic Baselayer T-Shirt', 
-            ['../../Images/gymsharkimg/producto5.webp', '../../Images/gymsharkimg/producto5.1.webp', '../../Images/gymsharkimg/producto5.2.webp', '../../Images/gymsharkimg/producto5.3.webp', '../../Images/gymsharkimg/producto5.4.webp'])">
-            <h2>Graphic Baselayer T-Shirt</h2>
-            <p>$35.00</p>
-            
-        </div>
-        
-        <div class="cat-product-card"> <!--6--> 
-            <img src="../../Images/gymsharkimg/producto6.webp" alt="img6" 
-            onclick="abrirModal('2012 Lifting Joggers', '2012 Lifting Joggers', 
-            ['../../Images/gymsharkimg/producto6.webp', '../../Images/gymsharkimg/producto6.1.webp', '../../Images/gymsharkimg/producto6.2.webp', '../../Images/gymsharkimg/producto6.3.webp', '../../Images/gymsharkimg/producto6.4.webp'])">
-            <h2>2012 Lifting Joggers</h2>
-            <p>$60.00</p>
-            
-        </div>
-        
-        <div class="cat-product-card"> <!--7--> 
-            <img src="../../Images/gymsharkimg/producto7.webp" alt="img7" 
-            onclick="abrirModal('Sport 7 Shorts', 'Sport 7 Shorts', 
-            ['../../Images/gymsharkimg/producto7.webp', '../../Images/gymsharkimg/producto7.1.webp', '../../Images/gymsharkimg/producto7.2.webp', '../../Images/gymsharkimg/producto7.3.webp', '../../Images/gymsharkimg/producto7.4.webp'])">
-            <h2>Sport 7 Shorts</h2>
-            <p>$38.00</p>
-            
-        </div>
-        
-        <div class="cat-product-card"> <!--8--> 
-            <img src="../../Images/gymsharkimg/producto8.webp" alt="img8" 
-            onclick="abrirModal('Mush Trucker', 'Mush Trucker', 
-            ['../../Images/gymsharkimg/producto8.webp', '../../Images/gymsharkimg/producto8.1.webp', '../../Images/gymsharkimg/producto8.2.webp', '../../Images/gymsharkimg/producto8.3.webp', '../../Images/gymsharkimg/producto8.4.webp'])">
-            <h2>Mush Trucker</h2>
-            <p>$35.00</p>
-            
-        </div>
-        
-        <div class="cat-product-card"> <!--9--> 
-            <img src="../../Images/gymsharkimg/producto9.webp" alt="img9" 
-            onclick="abrirModal('Bold Stringer', 'Bold Stringer', 
-            ['../../Images/gymsharkimg/producto9.webp', '../../Images/gymsharkimg/producto9.1.webp', '../../Images/gymsharkimg/producto9.2.webp', '../../Images/gymsharkimg/producto9.3.webp', '../../Images/gymsharkimg/producto9.4.webp'])">
-            <h2>Bold Stringer</h2>
-            <p>$24.00</p>
-            
-        </div>
-        
-        <div class="cat-product-card"> <!--10--> 
-            <img src="../../Images/gymsharkimg/producto10.webp" alt="img10" 
-            onclick="abrirModal('Heritage Washed Crew', 'Heritage Washed Crew', 
-            ['../../Images/gymsharkimg/producto10.webp', '../../Images/gymsharkimg/producto10.1.webp', '../../Images/gymsharkimg/producto10.2.webp', '../../Images/gymsharkimg/producto10.3.webp', '../../Images/gymsharkimg/producto10.4.webp'])">
-            <h2>Heritage Washed Crew</h2>
-            <p>$75.00</p>
-            
-        </div>
         
     </section>
     <!--Footer -->
@@ -331,5 +254,10 @@
     <script src="../../javascript/productosCarrito.js"></script>
 
     <script src="../../script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => cargarProductos(1));
+    </script>
+    
 </body>
 </html>
