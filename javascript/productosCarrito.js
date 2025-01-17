@@ -61,7 +61,7 @@ function abrirModal(nombreProducto, descripcion, imagenes = [], precio) {
     productoActual = nombreProducto;
     descripcionActual = descripcion;
     imagenesActuales = imagenes;
-    precioActual = precio; // Asigna el precio del producto al abrir el modal
+    precioActual = precio;
 
     console.log("Modal abierto con:", { nombreProducto, descripcion, imagenes, precio });
 
@@ -69,7 +69,8 @@ function abrirModal(nombreProducto, descripcion, imagenes = [], precio) {
 
     // Establecer la primera imagen como principal
     const mainImg = document.getElementById("main-img");
-    mainImg.src = imagenes.length > 0 ? imagenes[0] : '../../Images/logo1-nb-white.png';
+    imagenPrincipal = imagenes.length > 0 ? imagenes[0] : '../../Images/logo1-nb-white.png'; // Inicializa imagenPrincipal
+    mainImg.src = imagenPrincipal; // Mostrar la primera imagen como principal
 
     // Mostrar el nombre del producto
     document.getElementById("modal-product-name").textContent = nombreProducto;
@@ -152,24 +153,36 @@ let carrito = [];
                 return;
             }
         
+            if (!cantidad || cantidad <= 0) {
+                alert("Por favor, selecciona una cantidad válida.");
+                return;
+            }
+        
             const talla = tallaBotonSeleccionado.getAttribute("data-talla");
-            alert(`Has comprado ${cantidad} unidad(es) de ${productoActual} en talla ${talla} :)`);
+        
+            if (!imagenPrincipal) {
+                alert("Ocurrió un error con la imagen del producto. Intenta nuevamente.");
+                return;
+            }
         
             // Datos del producto
             const producto = {
                 nombre: productoActual,
                 descripcion: descripcionActual,
-                imagen: imagenPrincipal,
+                imagen: imagenPrincipal, // Asegúrate de que imagenPrincipal tiene un valor
                 cantidad: cantidad,
                 talla: talla,
                 precio: precioActual, // Usar precioActual definido en abrirModal
             };
+        
+            alert(`Has comprado ${cantidad} unidad(es) de ${productoActual} en talla ${talla} :)`);
         
             carrito.push(producto); // Agregar producto al carrito
             cerrarModal(); // Cierra el modal
             actualizarCarrito(); // Actualiza el carrito visualmente
             guardarCarrito(); // Guarda el carrito en localStorage
         }
+        
         
         window.comprarProducto = comprarProducto;
 

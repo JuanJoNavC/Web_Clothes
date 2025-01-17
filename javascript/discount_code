@@ -231,16 +231,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const result = await response.json();
 
             if (response.ok && result.valido) {
-                descuentoAplicado = Math.round(result.porcentaje) + '%';
+                descuentoAplicado = Math.round(result.porcentaje); // Guardar como número
                 codigoAplicado = code;
-
+            
                 // Mostrar contenedor del descuento
                 discountCodeElement.textContent = code;
-                discountPercentageElement.textContent = descuentoAplicado;
+                discountPercentageElement.textContent = `${descuentoAplicado}%`; // Aquí puedes mostrar el símbolo
                 appliedDiscountContainer.style.display = "flex"; // Mostrar con estilos
                 document.getElementById("applied-discount-percentage").style.display = "flex"; // Mostrar el porcentaje de descuento
-
-                alert(`¡Código aplicado! Se ha descontado un ${descuentoAplicado} del total.`);
+            
+                alert(`¡Código aplicado! Se ha descontado un ${descuentoAplicado}% del total.`);
                 discountInput.value = '';
                 actualizarTotales();
             } else {

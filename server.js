@@ -35,8 +35,8 @@ const pool = mysql.createPool({
     database: 'defaultdb',
     port: 27073,
     ssl: {
-        //ca: fs.readFileSync(caCertificatePath)
-        ca: process.env.caCertificatePath, // Lee el certificado desde el archivo
+        ca: fs.readFileSync(caCertificatePath)
+        //ca: process.env.caCertificatePath, // Lee el certificado desde el archivo
     },
 });
 
@@ -53,7 +53,7 @@ const pool = mysql.createPool({
 
 // Endpoint para manejar solicitudes POST de Registro
 app.post('/submit', async (req, res) => {
-    const { name, email, password, dob, gender, size, cedula, address, phone } = req.body;
+    const { name, email, password, dob, gender, size, cedula, phone } = req.body;
 
     try {
         // Encripta la contraseña

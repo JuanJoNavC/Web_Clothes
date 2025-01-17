@@ -11,7 +11,6 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
     const gender = document.getElementById('gender').value;
     const size = document.getElementById('size').value;
     const cedula = document.getElementById('cedula').value.trim();
-    const address = document.getElementById('address').value.trim();
     const phone = document.getElementById('phone').value.trim();
 
     // Validate the fields
@@ -55,11 +54,6 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
         return;
     }
 
-    if (!address) {
-        alert("Por favor, ingrese su dirección de envío.");
-        return;
-    }
-
     if (!phone || !validatePhone(phone)) {
         alert("Por favor, ingrese un número de teléfono válido (10 dígitos).");
         return;
@@ -71,7 +65,7 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email, password, dob, gender, size, cedula, address, phone })
+        body: JSON.stringify({ name, email, password, dob, gender, size, cedula, phone })
     })
         .then(response => response.json())
         .then(data => alert(data.message))

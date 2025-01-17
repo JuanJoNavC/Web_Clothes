@@ -364,8 +364,20 @@ body.dark-mode p {
 }
 
 /* Descripción */
-body.dark-mode #modal-desc {
-    color: #d3d3d3; /* Texto gris claro */
+body.dark-mode .modal-desc {
+    color: #ffffff; /* Texto gris claro */
+    background-color: #333;
+    border-top: 1px solid #ffffff; /* Línea superior para separación */
+    border-bottom: 1px solid #ffffff;
+}
+
+body.dark-mode #modal-product-description{
+    background-color: #333;
+    color: white;
+}
+
+body.dark-mode #modal-product-name{
+    color: white;
 }
 
 /* Miniaturas */
