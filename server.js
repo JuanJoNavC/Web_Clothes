@@ -35,8 +35,8 @@ const pool = mysql.createPool({
     database: 'defaultdb',
     port: 27073,
     ssl: {
-        ca: fs.readFileSync(caCertificatePath)
-        //ca: process.env.caCertificatePath, // Lee el certificado desde el archivo
+        //ca: fs.readFileSync(caCertificatePath)
+        ca: process.env.caCertificatePath, // Lee el certificado desde el archivo
     },
 });
 
