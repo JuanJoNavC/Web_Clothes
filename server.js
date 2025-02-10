@@ -35,8 +35,8 @@ const pool = mysql.createPool({
     database: 'defaultdb',
     port: 27073,
     ssl: {
-        //ca: fs.readFileSync(caCertificatePath)
-        ca: process.env.caCertificatePath, // Lee el certificado desde el archivo
+        ca: fs.readFileSync(caCertificatePath)
+        //ca: process.env.caCertificatePath, // Lee el certificado desde el archivo
     },
 });
 
@@ -148,6 +148,62 @@ app.post('/login', async (req, res) => {
 });
 
 
+// Endpoint para obtener los productos con sus imágenes
+app.get("/productos", async (req, res) => {
+    console.log("Solicitud recibida para obtener los productos");
+
+    try {
+        const { categoria } = req.query; // Obtener el parámetro de categoría
+
+        const query = `
+            SELECT 
+                p.id_producto, 
+                p.nombre, 
+                p.descripcion, 
+                p.precio_venta, 
+                p.id_categoria,
+                GROUP_CONCAT(i.url_imagen ORDER BY i.orden ASC) AS imagenes
+            FROM 
+                productos p
+            LEFT JOIN 
+                imagenes_productos i 
+            ON 
+                p.id_producto = i.id_producto
+            WHERE 
+                p.eliminacion_logica = 0
+                ${categoria ? "AND p.id_categoria = ?" : ""} -- Filtro opcional por categoría
+            GROUP BY 
+                p.id_producto;
+        `;
+
+        const [rows] = categoria 
+            ? await pool.execute(query, [categoria]) 
+            : await pool.execute(query);
+
+        if (rows.length > 0) {
+            const productos = rows.map(row => ({
+                id_producto: row.id_producto,
+                nombre: row.nombre,
+                descripcion: row.descripcion,
+                precio_venta: row.precio_venta,
+                id_categoria: row.id_categoria,
+                imagenes: row.imagenes ? row.imagenes.split(",") : [] // Divide las imágenes en un array
+            }));
+
+            res.json(productos);
+        } else {
+            res.status(404).json({ mensaje: "No se encontraron productos." });
+        }
+    } catch (error) {
+        console.error("Error al obtener los productos:", error);
+        res.status(500).json({ mensaje: "Error interno del servidor." });
+    }
+});
+
+
+
+
+
 //Endpoint para validar el codigo de descuento
 app.post("/validate-discount-code", async (req, res) => {
     const { code } = req.body;
@@ -241,60 +297,6 @@ app.get("/usuarios/datos", async (req, res) => {
         }
     } catch (error) {
         console.error("Error al obtener los datos del usuario:", error);
-        res.status(500).json({ mensaje: "Error interno del servidor." });
-    }
-});
-
-
-
-// Endpoint para obtener los productos con sus imágenes
-app.get("/productos", async (req, res) => {
-    console.log("Solicitud recibida para obtener los productos");
-
-    try {
-        const { categoria } = req.query; // Obtener el parámetro de categoría
-
-        const query = `
-            SELECT 
-                p.id_producto, 
-                p.nombre, 
-                p.descripcion, 
-                p.precio_venta, 
-                p.id_categoria,
-                GROUP_CONCAT(i.url_imagen ORDER BY i.orden ASC) AS imagenes
-            FROM 
-                productos p
-            LEFT JOIN 
-                imagenes_productos i 
-            ON 
-                p.id_producto = i.id_producto
-            WHERE 
-                p.eliminacion_logica = 0
-                ${categoria ? "AND p.id_categoria = ?" : ""} -- Filtro opcional por categoría
-            GROUP BY 
-                p.id_producto;
-        `;
-
-        const [rows] = categoria 
-            ? await pool.execute(query, [categoria]) 
-            : await pool.execute(query);
-
-        if (rows.length > 0) {
-            const productos = rows.map(row => ({
-                id_producto: row.id_producto,
-                nombre: row.nombre,
-                descripcion: row.descripcion,
-                precio_venta: row.precio_venta,
-                id_categoria: row.id_categoria,
-                imagenes: row.imagenes ? row.imagenes.split(",") : [] // Divide las imágenes en un array
-            }));
-
-            res.json(productos);
-        } else {
-            res.status(404).json({ mensaje: "No se encontraron productos." });
-        }
-    } catch (error) {
-        console.error("Error al obtener los productos:", error);
         res.status(500).json({ mensaje: "Error interno del servidor." });
     }
 });

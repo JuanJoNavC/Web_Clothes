@@ -357,6 +357,8 @@ cvcCodeInput.addEventListener('input', () => {
 
 /*Generar la factura en la bd*/
 
+
+
 // Verificar si el DOM ha cargado antes de agregar el evento
 document.addEventListener("DOMContentLoaded", () => {
     // Vincular la función guardarFactura al botón
