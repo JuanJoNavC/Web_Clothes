@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mysql = require('mysql2/promise'); // Usamos mysql2 para trabajar con MySQL
 const app = express();
-const PORT = 3006;
 const fs = require('fs');
 const caCertificatePath = path.join(__dirname, 'ca.pem'); // Asegúrate de que esta ruta sea correcta
 const bcrypt = require('bcrypt');
@@ -580,7 +579,7 @@ app.get("/api/productos/buscar", async (req, res) => {
 
 
 
-
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
