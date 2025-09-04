@@ -16,5 +16,8 @@
     "mysql2": "^3.12.0",
     "sportshop": "file:",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.7.10"
   }
 }
